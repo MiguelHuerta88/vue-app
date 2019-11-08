@@ -3,6 +3,8 @@
 	<head>
 		<title>This is s simple single page app. </title>
 		<meta name="description" content="The purpose of this app is to work out way to a single page application (SPA)." >
+
+		<link href="./styles.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -11,9 +13,11 @@
 			<h2>{{ heading}} </h2>
 
 			<div class="books">
-				<div class="item" v-for="book in books">
-					<p> {{ book.title}} </p> - <span class='author'> {{ book.author }}</span> <span> {{ book.published }} </span>
-				</div>
+				<ul class="items">
+					<li v-for="book in books">
+						<p> {{ book.title}} </p><p class='author'> {{ book.author }}</p> <p> {{ book.published }} </p>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<!-- development version, includes helpful console warnings -->
