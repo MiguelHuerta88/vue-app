@@ -1844,7 +1844,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-d9c7ac8e] {\n    display: -webkit-box;\n    display: flex;\n}\n.book-img[data-v-d9c7ac8e] {\n    width: 120px;\n    height: 120px;\n    margin-right: 10px;\n}\n.book-img i[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-d9c7ac8e] {\n    display: -webkit-box;\n    display: flex;\n}\n.book-content[data-v-d9c7ac8e] {\n    width: 80%;\n}\n.book-img[data-v-d9c7ac8e] {\n    background: lightblue;\n    width: 120px;\n    height: 120px;\n    margin-right: 10px;\n}\n.book-img i[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    font-size: 100px;\n}\n", ""]);
 
 // exports
 
@@ -1863,7 +1863,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n}\n.items li[data-v-6de819c4] {\n            border: 1px solid #000;\n            padding: 15px 10px;\n            display: -webkit-box;\n            display: flex;\n            margin-bottom: 10px;\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n}\n.items li[data-v-6de819c4] {\n            border: 2px solid lightcoral;\n            padding: 15px 10px;\n            display: -webkit-box;\n            display: flex;\n            margin-bottom: 30px;\n            border-radius: 3px;\n            -moz-border-radius: 3px;\n            -webkit-border-radius: 3px;\n            box-shadow:5px 10px #888888\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n", ""]);
 
 // exports
 
@@ -3102,7 +3102,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "book-img" }),
     _vm._v(" "),
     _c("div", { staticClass: "book-content" }, [
       _c("div", { staticClass: "info" }, [
@@ -3123,16 +3123,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "book-img" }, [
-      _c("i", { staticClass: "fa fa-book" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

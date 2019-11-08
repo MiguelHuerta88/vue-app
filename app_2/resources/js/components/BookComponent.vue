@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="book-img">
-            <i class="fa fa-book"></i>
+            <!--<i class="fa fa-book"></i>-->
         </div>
         <div class="book-content">
             <div class="info">
@@ -23,7 +23,11 @@
     .container {
         display: flex;
     }
+    .book-content {
+        width: 80%;
+    }
     .book-img {
+        background: lightblue;
         width: 120px;
         height: 120px;
         margin-right: 10px;

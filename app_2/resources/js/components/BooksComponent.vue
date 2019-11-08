@@ -47,10 +47,14 @@
             margin: 0;
         }
             .items li {
-                border: 1px solid #000;
+                border: 2px solid lightcoral;
                 padding: 15px 10px;
                 display: flex;
-                margin-bottom: 10px;
+                margin-bottom: 30px;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                box-shadow:5px 10px #888888
             }
             .items li:last-child {
                 margin-bottom: 0;
