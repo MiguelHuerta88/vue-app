@@ -1,12 +1,15 @@
 <template>
     <div>
-        <!-- header logo or something -->
-        <div class="header" v-if="logoLink">
-            <!-- left blank for now -->
-            <img :src="logoLink" >
-            <div>Online Bookstore</div>
-        </div>
+        <router-link to="/">
+            <!-- header logo or something -->
+            <div class="header" v-if="logoLink">
+                <!-- left blank for now -->
+                <img :src="logoLink" >
+                <div>Online Bookstore</div>
+            </div>
+        </router-link>
 
+        <router-view></router-view>
     </div>
 </template>
 <script>

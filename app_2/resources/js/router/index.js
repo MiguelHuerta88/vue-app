@@ -8,7 +8,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '/vue-app/app_2/public/',
             component: BooksComponent
         }
     ]
