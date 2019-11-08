@@ -5,7 +5,7 @@ import BookListingComponent from "../components/BookListingComponent";
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({
+let router = new VueRouter({
     mode: 'history',
     routes: [
         {

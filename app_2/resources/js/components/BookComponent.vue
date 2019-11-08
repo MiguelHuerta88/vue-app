@@ -22,6 +22,11 @@
     }
 </script>
 <style scoped>
+    a {
+        text-decoration: none;
+        cursor: pointer;
+        color: #000;
+    }
     .container {
         display: flex;
     }
