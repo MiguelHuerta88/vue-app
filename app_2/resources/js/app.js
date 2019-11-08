@@ -35,9 +35,9 @@ window.Vue = require('vue');
 
 /* begining of Vue app code */
 import Vue from 'vue'
-import BooksComponent from './components/BooksComponent.vue'
+import App from './components/App.vue'
 
 var app = new Vue({
 	el: '#app',
-	render: h => h(BooksComponent),
+	render: h => h(App),
 });
