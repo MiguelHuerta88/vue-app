@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/vue-app/app_2/public/">
+        <router-link :to="{name: 'home'}">
             <!-- header logo or something -->
             <div class="header" v-if="logoLink">
                 <!-- left blank for now -->

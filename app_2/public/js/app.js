@@ -3064,7 +3064,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("router-link", { attrs: { to: "/vue-app/app_2/public/" } }, [
+      _c("router-link", { attrs: { to: { name: "home" } } }, [
         _vm.logoLink
           ? _c("div", { staticClass: "header" }, [
               _c("img", { attrs: { src: _vm.logoLink } }),
@@ -18506,14 +18506,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BooksComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BooksComponent */ "./resources/js/components/BooksComponent.vue");
 
 
+ //import BookListingComponent from "../components/BookListingComponent";
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
   routes: [{
+    name: 'home',
     path: '/vue-app/app_2/public/',
     component: _components_BooksComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }]
+  }
+  /*{
+      name: 'book',
+      path: '/vue-app/app_2/public/book/:book',
+      component: BookListingComponent
+  }*/
+  ]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

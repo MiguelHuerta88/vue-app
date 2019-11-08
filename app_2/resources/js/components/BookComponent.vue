@@ -1,17 +1,19 @@
 <template>
-    <div class="container">
-        <div class="book-img">
-            <!--<i class="fa fa-book"></i>-->
-        </div>
-        <div class="book-content">
-            <div class="info">
-                <p> Title: {{ book.title }}
-                <p>Author: <i class="fa fa-user"></i> {{ book.author }}
-                <p> Published On: {{ book.published_on }} </p>
-                <div> {{ book.description }}</div>
+    <router-link :to="{name: 'book', params: {book: book.id}}">
+        <div class="container">
+            <div class="book-img">
+                <!--<i class="fa fa-book"></i>-->
+            </div>
+            <div class="book-content">
+                <div class="info">
+                    <p> Title: {{ book.title }}
+                    <p>Author: <i class="fa fa-user"></i> {{ book.author }}
+                    <p> Published On: {{ book.published_on }} </p>
+                    <div> {{ book.description }}</div>
+                </div>
             </div>
         </div>
-    </div>
+    </router-link>
 </template>
 <script>
     export default {
