@@ -4,17 +4,7 @@
 		<div class="books-list" v-if="books">
 			<ul class="items">
 				<li v-for="book in books">
-					<div class="book-img">
-						<i class="fa fa-book"></i>
-					</div>
-					<div class="book-content">
-						<div class="info">
-							<p> Title: {{ book.title }}
-							<p>Author: <i class="fa fa-user"></i> {{ book.author }}
-							<p> Published On: {{ book.published_on }} </p>
-							<div> {{ book.description }}</div>
-						</div>
-					</div>
+					<BookComponent :key="book.id" :book="book"></BookComponent>
 				</li>
 			</ul>
 		</div>
@@ -22,6 +12,7 @@
 </template>
 <script>
 	import axios from 'axios';
+	import BookComponent from './BookComponent.vue';
 
 	export default{
 		data() {
@@ -35,7 +26,10 @@
 			// this url should be not hardcoded i think
             /* once we begin using VUEX this will be moved. to keep all api calls centralized */
             axios.get('/vue-app/app_2/public/api/books').then(response => this.books = response.data);
-		}
+		},
+        components: {
+		    BookComponent
+        }
 	}
 </script>
 <style scoped>
@@ -61,14 +55,4 @@
             .items li:last-child {
                 margin-bottom: 0;
             }
-            .book-img {
-                width: 120px;
-                height: 120px;
-                margin-right: 10px;
-            }
-                .book-img i {
-                    width: 100%;
-                    height: 100%;
-                    font-size: 100px;
-                }
 </style>
