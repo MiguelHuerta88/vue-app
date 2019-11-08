@@ -5,6 +5,7 @@
 		<meta name="description" content="The purpose of this app is to work out way to a single page application (SPA)." >
 
 		<link href="./styles.css" rel="stylesheet">
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -15,7 +16,17 @@
 			<div class="books">
 				<ul class="items">
 					<li v-for="book in books">
-						<p> {{ book.title}} </p><p class='author'> {{ book.author }}</p> <p> {{ book.published }} </p>
+						<div class="book-img">
+							<i class="fa fa-book"></i>
+						</div>
+						<div class="book-content">
+							<div class="info">
+								<p> Title: {{ book.title }}
+								<p>Author: <i class="fa fa-user"></i> {{ book.author }}
+								<p> Published On: {{ book.published }} </p>
+								<div> {{ book.description }}</div>
+							</div>
+						</div>
 					</li>
 				</ul>
 			</div>
