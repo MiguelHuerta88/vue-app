@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/">
+        <router-link to="/vue-app/app_2/public/">
             <!-- header logo or something -->
             <div class="header" v-if="logoLink">
                 <!-- left blank for now -->
@@ -30,6 +30,9 @@
     }
 </script>
 <style>
+    a {
+        text-decoration: none;
+    }
     .header {
         width: 100%;
         border: 1px solid #ccc;

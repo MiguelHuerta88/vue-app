@@ -1769,7 +1769,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      heading: "Welcome, All Our Book Inventory",
+      heading: "Current Inventory",
       books: null
     };
   },
@@ -1800,7 +1800,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.header {\n    width: 100%;\n    border: 1px solid #ccc;\n    background: #ccc;\n    height: 100px;\n    display: -webkit-box;\n    display: flex;\n    font-family: sans-serif;\n}\n.header img {\n    width: 8%;\n    height: 100px;\n    -o-object-fit: contain;\n       object-fit: contain;\n    text-align: left;\n}\n.header div {\n    width: 91%;\n    margin: 20px;\n    font-size: 50px;\n    font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "\na {\n    text-decoration: none;\n}\n.header {\n    width: 100%;\n    border: 1px solid #ccc;\n    background: #ccc;\n    height: 100px;\n    display: -webkit-box;\n    display: flex;\n    font-family: sans-serif;\n}\n.header img {\n    width: 8%;\n    height: 100px;\n    -o-object-fit: contain;\n       object-fit: contain;\n    text-align: left;\n}\n.header div {\n    width: 91%;\n    margin: 20px;\n    font-size: 50px;\n    font-weight: 600;\n}\n", ""]);
 
 // exports
 
@@ -1819,7 +1819,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.books-list[data-v-6de819c4] {\n\tdisplay: relative;\n\twidth: 100%;\n}\nul.items[data-v-6de819c4] {\n\t\tlist-style-type: none;\n}\n.items li[data-v-6de819c4] {\n\t\t\tborder: 1px solid #000;\n\t\t\tpadding: 15px 10px;\n\t\t\tdisplay: -webkit-box;\n\t\t\tdisplay: flex;\n\t\t\tmargin-bottom: 10px;\n}\n.items li[data-v-6de819c4]:last-child {\n\t\t\tmargin-bottom: 0;\n}\n.book-img[data-v-6de819c4] {\n\t\t\twidth: 120px;\n\t\t\theight: 120px;\n\t\t\tmargin-right: 10px;\n}\n.book-img i[data-v-6de819c4] {\n\t\t\t\twidth: 100%;\n\t\t\t\theight: 100%;\n\t\t\t\tfont-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n}\n.items li[data-v-6de819c4] {\n            border: 1px solid #000;\n            padding: 15px 10px;\n            display: -webkit-box;\n            display: flex;\n            margin-bottom: 10px;\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n.book-img[data-v-6de819c4] {\n            width: 120px;\n            height: 120px;\n            margin-right: 10px;\n}\n.book-img i[data-v-6de819c4] {\n                width: 100%;\n                height: 100%;\n                font-size: 100px;\n}\n", ""]);
 
 // exports
 
@@ -2990,7 +2990,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("router-link", { attrs: { to: "/" } }, [
+      _c("router-link", { attrs: { to: "/vue-app/app_2/public/" } }, [
         _vm.logoLink
           ? _c("div", { staticClass: "header" }, [
               _c("img", { attrs: { src: _vm.logoLink } }),
@@ -3027,7 +3027,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("h2", [_vm._v(_vm._s(_vm.heading) + " ")]),
     _vm._v(" "),
     _vm.books

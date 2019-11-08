@@ -25,5 +25,15 @@ class BooksTableSeeder extends Seeder
 	        "description" => "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
 
         ]);
+
+        $faker = Faker\Factory::create();
+        for($i = 0; $i < 11 ; $i++) {
+            DB::table('books')->insert([
+                'title' => $faker->text(100),
+                'author' => $faker->name,
+                'published_on' => $faker->time("Y-m-d H:i:s"),
+                'description' => $faker->text
+            ]);
+        }
     }
 }
