@@ -11,8 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/books', 'SinglePageAppController@books');
+Route::get('/', 'SinglePageAppController@books');
+//Route::get('/books', 'SinglePageAppController@books');
