@@ -33,7 +33,8 @@
 		mounted() {
 			// make axios call to API
 			// this url should be not hardcoded i think
-			axios.get('/vue-app/app_2/public/api/books').then(response => this.books = response.data);
+            /* once we begin using VUEX this will be moved. to keep all api calls centralized */
+            axios.get('/vue-app/app_2/public/api/books').then(response => this.books = response.data);
 		}
 	}
 </script>

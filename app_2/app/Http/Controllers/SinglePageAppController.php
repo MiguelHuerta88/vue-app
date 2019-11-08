@@ -20,4 +20,9 @@ class SinglePageAppController extends Controller
 
     	return view('spa', ['data' => $books]);
     }
+
+    public function logo()
+    {
+        return response()->json(asset('images/bookstore-logo.png'));
+    }
 }
