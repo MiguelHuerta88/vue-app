@@ -9,14 +9,14 @@ class SinglePageAppController extends Controller
 {
     public function booksJson()
     {
-    	$books = Books::all();
+    	$books = Books::all()->load('images');
 
     	return response()->json($books);
     }
 
     public function books()
     {
-    	$books = Books::all();
+    	$books = Books::all()->load('images');
 
     	return view('spa', ['data' => $books]);
     }

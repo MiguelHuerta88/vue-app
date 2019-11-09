@@ -1758,6 +1758,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['book']
 });
@@ -1868,7 +1869,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    cursor: pointer;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    display: -webkit-box;\n    display: flex;\n}\n.book-content[data-v-d9c7ac8e] {\n    width: 80%;\n}\n.book-img[data-v-d9c7ac8e] {\n    background: lightblue;\n    width: 120px;\n    height: 120px;\n    margin-right: 10px;\n}\n.book-img i[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    cursor: pointer;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    display: -webkit-box;\n    display: flex;\n}\n.book-content[data-v-d9c7ac8e] {\n    width: 80%;\n}\n.book-img[data-v-d9c7ac8e] {\n    width: 120px;\n    height: 120px;\n    margin-right: 10px;\n}\n.book-img i[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    font-size: 100px;\n}\n.book-img img[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    -o-object-fit: contain;\n       object-fit: contain;\n}\n", ""]);
 
 // exports
 
@@ -3130,7 +3131,11 @@ var render = function() {
     { attrs: { to: { name: "book", params: { book: _vm.book.id } } } },
     [
       _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "book-img" }),
+        _c("div", { staticClass: "book-img" }, [
+          _vm.book.images
+            ? _c("img", { attrs: { src: _vm.book.images.url } })
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "book-content" }, [
           _c("div", { staticClass: "info" }, [
