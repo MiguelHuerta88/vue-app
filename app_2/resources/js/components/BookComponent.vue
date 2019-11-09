@@ -3,7 +3,7 @@
         <div class="container">
             <div class="img"><img v-if="book.images" :src="book.images.url"></div>
             <div class="content">
-                <div class="title"> Title: {{ book.title }} </div>
+                <div class="title"> {{ book.title }} </div>
                 <div class="author"> Author: {{ book.author }} </div>
                 <div class="published"> Published On: {{ book.published_on }} </div>
             </div>       
@@ -13,7 +13,6 @@
 <script>
     export default {
         props: ['book'],
-
     }
 </script>
 <style scoped>

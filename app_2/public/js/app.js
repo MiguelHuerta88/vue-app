@@ -3211,7 +3211,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "content" }, [
           _c("div", { staticClass: "title" }, [
-            _vm._v(" Title: " + _vm._s(_vm.book.title) + " ")
+            _vm._v(" " + _vm._s(_vm.book.title) + " ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "author" }, [
