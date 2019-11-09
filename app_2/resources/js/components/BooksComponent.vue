@@ -45,16 +45,21 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            /*display: flex;*/
         }
             .items li {
                 border: 2px solid lightcoral;
-                padding: 15px 10px;
-                display: flex;
+                /*padding: 15px 10px;*/
+                display: inline-block;
                 margin-bottom: 30px;
                 border-radius: 3px;
                 -moz-border-radius: 3px;
                 -webkit-border-radius: 3px;
-                box-shadow:5px 10px #888888
+                box-shadow:5px 10px #888888;
+                width: 48%;
+            }
+            .items li:nth-child(2n) {
+                margin-left: 2%;
             }
             .items li:last-child {
                 margin-bottom: 0;

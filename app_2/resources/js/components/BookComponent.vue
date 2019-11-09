@@ -1,18 +1,12 @@
 <template>
     <router-link :to="{name: 'book', params: {book: book.id}}">
         <div class="container">
-            <div class="book-img">
-                <!-- we dont use :src since we dont need to bind it to anything -->
-                <img v-if="book.images" :src="book.images.url">
-            </div>
-            <div class="book-content">
-                <div class="info">
-                    <p> Title: {{ book.title }}
-                    <p>Author: <i class="fa fa-user"></i> {{ book.author }}
-                    <p> Published On: {{ book.published_on }} </p>
-                    <div> {{ book.description }}</div>
-                </div>
-            </div>
+            <div class="img"><img v-if="book.images" :src="book.images.url"></div>
+            <div class="content">
+                <div class="title"> Title: {{ book.title }} </div>
+                <div class="author"> Author: {{ book.author }} </div>
+                <div class="published"> Published On: {{ book.published_on }} </div>
+            </div>       
         </div>
     </router-link>
 </template>
@@ -25,28 +19,31 @@
 <style scoped>
     a {
         text-decoration: none;
-        cursor: pointer;
         color: #000;
     }
     .container {
+        font-family: sans-serif;
+        height: 200px;
+        width: 100%;
         display: flex;
     }
-    .book-content {
-        width: 80%;
+    .img img {
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
     }
-    .book-img {
-        width: 120px;
-        height: 120px;
-        margin-right: 10px;
+    .content {
+        margin: 10px 10px;
+        font-weight: 800;
     }
-    .book-img i {
-        width: 100%;
-        height: 100%;
-        font-size: 100px;
+    .title {
+        font-style: italic;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 40px;
     }
-    .book-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+    .author, .published {
+        font-size: 10px;
     }
+
 </style>

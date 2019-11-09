@@ -1753,12 +1753,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['book']
 });
@@ -1869,7 +1863,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    cursor: pointer;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    display: -webkit-box;\n    display: flex;\n}\n.book-content[data-v-d9c7ac8e] {\n    width: 80%;\n}\n.book-img[data-v-d9c7ac8e] {\n    width: 120px;\n    height: 120px;\n    margin-right: 10px;\n}\n.book-img i[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    font-size: 100px;\n}\n.book-img img[data-v-d9c7ac8e] {\n    width: 100%;\n    height: 100%;\n    -o-object-fit: contain;\n       object-fit: contain;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    font-family: sans-serif;\n    height: 200px;\n    width: 100%;\n    display: -webkit-box;\n    display: flex;\n}\n.img img[data-v-d9c7ac8e] {\n    height: 200px;\n    width: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.content[data-v-d9c7ac8e] {\n    margin: 10px 10px;\n    font-weight: 800;\n}\n.title[data-v-d9c7ac8e] {\n    font-style: italic;\n    text-transform: uppercase;\n    font-size: 18px;\n    margin-bottom: 40px;\n}\n.author[data-v-d9c7ac8e], .published[data-v-d9c7ac8e] {\n    font-size: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -1888,7 +1882,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n}\n.items li[data-v-6de819c4] {\n            border: 2px solid lightcoral;\n            padding: 15px 10px;\n            display: -webkit-box;\n            display: flex;\n            margin-bottom: 30px;\n            border-radius: 3px;\n            -moz-border-radius: 3px;\n            -webkit-border-radius: 3px;\n            box-shadow:5px 10px #888888\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n        /*display: flex;*/\n}\n.items li[data-v-6de819c4] {\n            border: 2px solid lightcoral;\n            /*padding: 15px 10px;*/\n            display: inline-block;\n            margin-bottom: 30px;\n            border-radius: 3px;\n            -moz-border-radius: 3px;\n            -webkit-border-radius: 3px;\n            box-shadow:5px 10px #888888;\n            width: 48%;\n}\n.items li[data-v-6de819c4]:nth-child(2n) {\n            margin-left: 2%;\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n", ""]);
 
 // exports
 
@@ -3131,27 +3125,23 @@ var render = function() {
     { attrs: { to: { name: "book", params: { book: _vm.book.id } } } },
     [
       _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "book-img" }, [
+        _c("div", { staticClass: "img" }, [
           _vm.book.images
             ? _c("img", { attrs: { src: _vm.book.images.url } })
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "book-content" }, [
-          _c("div", { staticClass: "info" }, [
-            _c("p", [
-              _vm._v(" Title: " + _vm._s(_vm.book.title) + "\n                ")
-            ]),
-            _c("p", [
-              _vm._v("Author: "),
-              _c("i", { staticClass: "fa fa-user" }),
-              _vm._v(" " + _vm._s(_vm.book.author) + "\n                ")
-            ]),
-            _c("p", [
-              _vm._v(" Published On: " + _vm._s(_vm.book.published_on) + " ")
-            ]),
-            _vm._v(" "),
-            _c("div", [_vm._v(" " + _vm._s(_vm.book.description))])
+        _c("div", { staticClass: "content" }, [
+          _c("div", { staticClass: "title" }, [
+            _vm._v(" Title: " + _vm._s(_vm.book.title) + " ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "author" }, [
+            _vm._v(" Author: " + _vm._s(_vm.book.author) + " ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "published" }, [
+            _vm._v(" Published On: " + _vm._s(_vm.book.published_on) + " ")
           ])
         ])
       ])
