@@ -19,3 +19,4 @@ use Illuminate\Http\Request;
 
 Route::get('/books', 'SinglePageAppController@booksJson');
 Route::get('/logo', 'SinglePageAppController@logo');
+Route::get('/book/{book}', 'SinglePageAppController@apiShow');

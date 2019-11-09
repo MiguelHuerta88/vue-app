@@ -1,13 +1,18 @@
 <template>
-<h2>{{ message }}</h2>
+<h2>{{ id }}</h2>
 </template>
 <script>
+	import axios from 'axios';
     export default {
-        data() {
-            return {
-                message : 'hello'
-            }
-        }
+    	data() {
+    		return {
+    			book: null
+    		}
+    	},
+        mounted() {
+        	axios.get("/vue-app/app_2/public/api/book", {params: {ID: id}}).then(response => this.book = response.data);
+        },
+        props: ['id']
     }
 </script>
 <style scoped>
