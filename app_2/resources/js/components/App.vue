@@ -8,12 +8,14 @@
                 <div>Online Bookstore</div>
             </div>
         </router-link>
+        <ToolBarComponent></ToolBarComponent>
 
         <router-view></router-view>
     </div>
 </template>
 <script>
     import axios from 'axios';
+    import ToolBarComponent from './ToolBarComponent';
 
     export default {
         data() {
@@ -27,6 +29,9 @@
                 this.logoLink = response.data;
             });
         },
+        components: {
+            ToolBarComponent
+        }
     }
 </script>
 <style>

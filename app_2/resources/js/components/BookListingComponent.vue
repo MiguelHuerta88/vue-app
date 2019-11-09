@@ -3,7 +3,7 @@
 		<div class="img">
 			<img :src="book.images.url" v-if="book && book.images">
 		</div>
-		<div class="content">
+		<div class="content" v-if="book">
 			<div class="title"> {{ book.title }} </div>
 			<div class="author"> <i class="fa fa-user"></i> {{ book.author }}</div>
 			<div class="published"> Published On: {{ readablePublished }} </div>
