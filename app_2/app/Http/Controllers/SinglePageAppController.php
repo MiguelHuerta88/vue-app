@@ -38,8 +38,6 @@ class SinglePageAppController extends Controller
     public function apiShow(Books $book)
     {
         $book->load('images');
-
-        // this method is pointless/ Since the data is never used we end up pingin the api
         return response()->json($book);
     }
 }

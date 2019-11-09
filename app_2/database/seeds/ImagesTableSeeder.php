@@ -17,7 +17,7 @@ class ImagesTableSeeder extends Seeder
         	DB::table('images')->insert([
         		'id' => $i,
         		'book_id' => $i,
-        		'url' => $faker->imageUrl($width = 300, $height = 200)
+        		'url' => $faker->imageUrl($width = 700, $height = 500)
         	]);
         }
     }
