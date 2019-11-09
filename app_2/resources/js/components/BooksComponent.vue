@@ -45,18 +45,21 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
-            /*display: flex;*/
+            display: flex;
         }
             .items li {
                 border: 2px solid lightcoral;
                 /*padding: 15px 10px;*/
-                display: inline-block;
+                /*display: inline-block;*/
+                display: flex;
+                overflow-x: hidden;
                 margin-bottom: 30px;
                 border-radius: 3px;
                 -moz-border-radius: 3px;
                 -webkit-border-radius: 3px;
                 box-shadow:5px 10px #888888;
-                width: 48%;
+                /*width: 48%;*/
+                width: 568px;
             }
             .items li:nth-child(2n) {
                 margin-left: 2%;
