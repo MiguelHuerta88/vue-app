@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{name: 'book', params: {book: book.id}}">
+    <router-link :to="{name: 'book', params: {book: book.id}}" class="item">
         <div class="container">
             <div class="img"><img v-if="book.images" :src="book.images.url"></div>
             <div class="content">
@@ -32,6 +32,7 @@
         object-fit: cover;
     }
     .content {
+        width: 350px;
         margin: 10px 10px;
         font-weight: 800;
     }

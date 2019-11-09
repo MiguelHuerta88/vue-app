@@ -1840,12 +1840,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      heading: "Current Inventory",
       books: null
     };
   },
@@ -1928,7 +1938,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    font-family: sans-serif;\n    height: 200px;\n    width: 100%;\n    display: -webkit-box;\n    display: flex;\n}\n.img img[data-v-d9c7ac8e] {\n    height: 200px;\n    width: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.content[data-v-d9c7ac8e] {\n    margin: 10px 10px;\n    font-weight: 800;\n}\n.title[data-v-d9c7ac8e] {\n    font-style: italic;\n    text-transform: uppercase;\n    font-size: 18px;\n    margin-bottom: 40px;\n}\n.author[data-v-d9c7ac8e], .published[data-v-d9c7ac8e] {\n    font-size: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-d9c7ac8e] {\n    text-decoration: none;\n    color: #000;\n}\n.container[data-v-d9c7ac8e] {\n    font-family: sans-serif;\n    height: 200px;\n    width: 100%;\n    display: -webkit-box;\n    display: flex;\n}\n.img img[data-v-d9c7ac8e] {\n    height: 200px;\n    width: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.content[data-v-d9c7ac8e] {\n    width: 350px;\n    margin: 10px 10px;\n    font-weight: 800;\n}\n.title[data-v-d9c7ac8e] {\n    font-style: italic;\n    text-transform: uppercase;\n    font-size: 18px;\n    margin-bottom: 40px;\n}\n.author[data-v-d9c7ac8e], .published[data-v-d9c7ac8e] {\n    font-size: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -1966,7 +1976,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\nul.items[data-v-6de819c4] {\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n        /*display: flex;*/\n}\n.items li[data-v-6de819c4] {\n            border: 2px solid lightcoral;\n            /*padding: 15px 10px;*/\n            display: inline-block;\n            margin-bottom: 30px;\n            border-radius: 3px;\n            -moz-border-radius: 3px;\n            -webkit-border-radius: 3px;\n            box-shadow:5px 10px #888888;\n            width: 48%;\n}\n.items li[data-v-6de819c4]:nth-child(2n) {\n            margin-left: 2%;\n}\n.items li[data-v-6de819c4]:last-child {\n            margin-bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6de819c4] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.books-list[data-v-6de819c4] {\n    position: relative;\n    width: 100%;\n}\n.carousel-items[data-v-6de819c4] {\n    overflow-x: hidden;\n    display: -webkit-box;\n    display: flex;\n}\n.item[data-v-6de819c4] {\n    border: 2px solid lightcoral;\n    display: -webkit-box;\n    display: flex;\n    /*padding: 15px 10px;*/\n    /*display: inline-block;*/\n    margin-bottom: 30px;\n    border-radius: 3px;\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    box-shadow:5px 10px #888888;\n    width: 48%;\n    /*width: 568px;*/\n    margin-right: 2%;\n}\n", ""]);
 
 // exports
 
@@ -3287,7 +3297,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "router-link",
-    { attrs: { to: { name: "book", params: { book: _vm.book.id } } } },
+    {
+      staticClass: "item",
+      attrs: { to: { name: "book", params: { book: _vm.book.id } } }
+    },
     [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "img" }, [
@@ -3391,22 +3404,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h2", [_vm._v(_vm._s(_vm.heading) + " ")]),
-    _vm._v(" "),
     _vm.books
-      ? _c("div", { staticClass: "books-list" }, [
-          _c(
-            "ul",
-            { staticClass: "items" },
-            _vm._l(_vm.books, function(book) {
-              return _c(
-                "li",
-                [_c("BookComponent", { key: book.id, attrs: { book: book } })],
-                1
-              )
-            }),
-            0
-          )
+      ? _c("div", { staticClass: "carousel-holder" }, [
+          _c("h2", [_vm._v(" Top Sellers ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "carousel" }, [
+            _c(
+              "div",
+              { staticClass: "carousel-items" },
+              _vm._l(_vm.books, function(book) {
+                return _c("BookComponent", {
+                  key: book.id,
+                  attrs: { book: book }
+                })
+              }),
+              1
+            )
+          ])
         ])
       : _vm._e()
   ])

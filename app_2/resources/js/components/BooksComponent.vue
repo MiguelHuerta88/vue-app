@@ -1,13 +1,16 @@
 <template>
 	<div class="container">
-		<h2>{{ heading }} </h2>
-		<div class="books-list" v-if="books">
-			<ul class="items">
-				<li v-for="book in books">
-					<BookComponent :key="book.id" :book="book"></BookComponent>
-				</li>
-			</ul>
-		</div>
+        <div class="carousel-holder" v-if="books">
+            <h2> Top Sellers </h2>
+            <div class="carousel">
+                <!-- controls components here -->
+
+                <!-- end of control components -->
+                <div class="carousel-items">
+                    <BookComponent v-for="book in books" :key="book.id" :book="book"></BookComponent>
+                </div>
+            </div>
+        </div>
 	</div>
 </template>
 <script>
@@ -17,7 +20,6 @@
 	export default{
 		data() {
 			return {
-				heading: "Current Inventory",
 				books: null
 			}
 		},
@@ -37,34 +39,22 @@
         margin: 15px 20px;
         font-family: sans-serif;
     }
-    .books-list {
-        position: relative;
-        width: 100%;
+    .carousel-items {
+        overflow-x: hidden;
+        display: flex;
     }
-        ul.items {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-            .items li {
-                border: 2px solid lightcoral;
-                /*padding: 15px 10px;*/
-                /*display: inline-block;*/
-                display: flex;
-                overflow-x: hidden;
-                margin-bottom: 30px;
-                border-radius: 3px;
-                -moz-border-radius: 3px;
-                -webkit-border-radius: 3px;
-                box-shadow:5px 10px #888888;
-                /*width: 48%;*/
-                width: 568px;
-            }
-            .items li:nth-child(2n) {
-                margin-left: 2%;
-            }
-            .items li:last-child {
-                margin-bottom: 0;
-            }
+    .item {
+        border: 2px solid lightcoral;
+        display: flex;
+        /*padding: 15px 10px;*/
+        /*display: inline-block;*/
+        margin-bottom: 30px;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        box-shadow:5px 10px #888888;
+        width: 48%;
+        /*width: 568px;*/
+        margin-right: 2%;
+    }
 </style>
