@@ -1783,6 +1783,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1910,7 +1911,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-44cb53cd] {\n\t\twidth: 100%;\n\t\tmargin: 20px;\n\t\tfont-family: sans-serif;\n}\n.img[data-v-44cb53cd] {\n\t\twidth: 97%;\n\t\theight: 500px;\n\t\tmargin-bottom: 20px;\n}\n.img img[data-v-44cb53cd] {\n\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\t-o-object-fit: cover;\n\t\t\t   object-fit: cover;\n}\n.title[data-v-44cb53cd] {\n        font-style: italic;\n        text-transform: uppercase;\n        font-size: 25px;\n        font-weight: 800;\n        margin-bottom: 40px;\n}\n.author[data-v-44cb53cd], .published[data-v-44cb53cd] {\n        font-size: 15px;\n        font-weight: 700;\n}\n.description[data-v-44cb53cd] {\n    \tfont-size: 15px;\n    \tmargin-top: 10px;\n}\n\t\n", ""]);
+exports.push([module.i, "\n.container[data-v-44cb53cd] {\n\t\twidth: 100%;\n\t\tmargin: 20px;\n\t\tfont-family: sans-serif;\n}\n.img[data-v-44cb53cd] {\n\t\twidth: 97%;\n\t\theight: 500px;\n\t\tmargin-bottom: 20px;\n}\n.img img[data-v-44cb53cd] {\n\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\t-o-object-fit: cover;\n\t\t\t   object-fit: cover;\n}\n.title[data-v-44cb53cd] {\n        font-style: italic;\n        text-transform: uppercase;\n        font-size: 25px;\n        font-weight: 800;\n        margin-bottom: 40px;\n}\n.author[data-v-44cb53cd], .published[data-v-44cb53cd], .description-label[data-v-44cb53cd] {\n        font-size: 15px;\n        font-weight: 700;\n}\n.description-label[data-v-44cb53cd] {\n    \tmargin-top: 20px;\n}\n.description[data-v-44cb53cd] {\n    \tfont-size: 15px;\n    \tmargin-top: 10px;\n}\n\t\n", ""]);
 
 // exports
 
@@ -3267,6 +3268,8 @@ var render = function() {
       _c("div", { staticClass: "published" }, [
         _vm._v(" Published On: " + _vm._s(_vm.readablePublished) + " ")
       ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "description-label" }, [_vm._v("Decription:")]),
       _vm._v(" "),
       _c("div", { staticClass: "description" }, [
         _vm._v(" " + _vm._s(_vm.book.description) + " ")

@@ -7,6 +7,7 @@
 			<div class="title"> {{ book.title }} </div>
 			<div class="author"> <i class="fa fa-user"></i> {{ book.author }}</div>
 			<div class="published"> Published On: {{ readablePublished }} </div>
+			<div class="description-label">Decription:</div>
 			<div class="description"> {{ book.description }} </div>
 		</div>
 	</div>
@@ -56,9 +57,12 @@
         font-weight: 800;
         margin-bottom: 40px;
     }
-    .author, .published {
+    .author, .published, .description-label {
         font-size: 15px;
         font-weight: 700;
+    }
+    .description-label {
+    	margin-top: 20px;
     }
     .description {
     	font-size: 15px;

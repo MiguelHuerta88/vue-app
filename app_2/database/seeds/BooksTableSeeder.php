@@ -32,7 +32,7 @@ class BooksTableSeeder extends Seeder
                 'title' => $faker->text(100),
                 'author' => $faker->name,
                 'published_on' => $faker->time("Y-m-d H:i:s"),
-                'description' => $faker->text
+                'description' => $faker->realText(2000, 2)
             ]);
         }
     }
