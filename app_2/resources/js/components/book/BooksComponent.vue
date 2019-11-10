@@ -15,7 +15,7 @@
 </template>
 <script>
 	import axios from 'axios';
-    import CarouselComponent from './CarouselComponent';
+    import CarouselComponent from '../carousel/CarouselComponent';
     import BookComponent from './BookComponent';
 
 	export default{

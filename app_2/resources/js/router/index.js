@@ -1,9 +1,9 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
-import BooksComponent from "../components/BooksComponent";
-import BookListingComponent from "../components/BookListingComponent";
-import ContactUsComponent from "../components/ContactUsComponent";
-import AboutUsComponent from "../components/AboutUsComponent";
+import BooksComponent from "../components/book/BooksComponent";
+import BookListingComponent from "../components/book/BookListingComponent";
+import ContactUsComponent from "../components/static/ContactUsComponent";
+import AboutUsComponent from "../components/static/AboutUsComponent";
 
 Vue.use(VueRouter);
 

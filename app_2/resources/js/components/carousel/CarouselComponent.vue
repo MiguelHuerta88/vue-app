@@ -14,7 +14,7 @@
 </template>
 <script>
 	import CarouselControlsComponent from './CarouselControlsComponent';
-	import BookComponent from './BookComponent';
+	import BookComponent from '../book/BookComponent';
 
 	const sliderWidth = 560;
     const rowSize = 2;

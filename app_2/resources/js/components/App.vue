@@ -16,8 +16,8 @@
 </template>
 <script>
     import axios from 'axios';
-    import ToolBarComponent from './ToolBarComponent';
-    import FooterComponent from './FooterComponent';
+    import ToolBarComponent from './layout/ToolBarComponent';
+    import FooterComponent from './layout/FooterComponent';
 
     export default {
         data() {
