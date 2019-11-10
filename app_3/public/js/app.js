@@ -1780,6 +1780,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api_BookApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/BookApi */ "./resources/js/api/BookApi.js");
 //
 //
 //
@@ -1795,6 +1796,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+var api = new _api_BookApi__WEBPACK_IMPORTED_MODULE_1__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1804,12 +1807,14 @@ __webpack_require__.r(__webpack_exports__);
 
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/vue-app/app_3/public/api/book/" + this.id).then(function (response) {
+    api.get('book/' + this.id).then(function (response) {
       return _this.book = response.data;
     });
+    /*axios.get("/vue-app/app_3/public/api/book/" + this.id).then(response =>
+     this.book = response.data);*/
   },
   computed: {
     readablePublished: function readablePublished() {
@@ -1859,7 +1864,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {},
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     // make axios call to API
@@ -20178,6 +20183,57 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/js/api/BookApi.js":
+/*!*************************************!*\
+  !*** ./resources/js/api/BookApi.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+ // this is the base uri and we pass in the remaining url
+
+var uri = "/vue-app/app_3/public/api/";
+
+var BookApi =
+/*#__PURE__*/
+function () {
+  function BookApi() {
+    _classCallCheck(this, BookApi);
+  } // silence is golden
+
+  /**
+   * get route wrapper for axios
+   * 
+   * @param path => string
+   * @return Promise
+   */
+
+
+  _createClass(BookApi, [{
+    key: "get",
+    value: function get(path) {
+      // use axios to pull the data
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + path);
+    }
+  }]);
+
+  return BookApi;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (BookApi);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -21231,7 +21287,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   modules: {
-    booksModule: _modules_books__WEBPACK_IMPORTED_MODULE_2__["default"]
+    books: _modules_books__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
 
@@ -21251,10 +21307,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /* this file will contain the store methods */
 
-var state = {};
-var mutations = {};
+var state = {
+  books: [],
+  mostRecentBooks: []
+}; // mutations as passed state, payload
+
+var mutations = {}; // actions are passed {{ commit }}, optional payload or context, payload
+
 var actions = {};
-var getters = {}; // make sure to export the module
+var getters = {
+  getBooks: function getBooks(state) {
+    return state.books;
+  },
+  getMostRecentBooks: function getMostRecentBooks(state) {
+    return state.mostRecentBooks;
+  },
+
+  /*getBook(state) {
+  	return id => state.find(book => id === book.id);
+  }*/
+  getBook: function getBook(state) {
+    return function (id) {
+      return state.find(function (book) {
+        return id === book.id;
+      });
+    };
+  }
+};
+var booksModule = {
+  state: state,
+  mutations: mutations,
+  actions: actions,
+  getters: getters
+}; // make sure to export the module
 
 /* harmony default export */ __webpack_exports__["default"] = (booksModule);
 

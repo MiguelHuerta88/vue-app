@@ -14,6 +14,9 @@
 </template>
 <script>
 	import axios from 'axios';
+    import BookApi from '../../api/BookApi';
+
+    const api = new BookApi();
     export default {
     	data() {
     		return {
@@ -23,9 +26,10 @@
     			//images: null
     		}
     	},
-        mounted() {
-        	axios.get("/vue-app/app_3/public/api/book/" + this.id).then(response =>
-        	 this.book = response.data);
+        created() {
+            api.get('book/' + this.id).then(response => this.book = response.data);
+        	/*axios.get("/vue-app/app_3/public/api/book/" + this.id).then(response =>
+        	 this.book = response.data);*/
         },
         computed: {
         	readablePublished() {

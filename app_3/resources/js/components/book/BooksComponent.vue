@@ -27,7 +27,7 @@
 		},
         methods: {
         },
-		mounted() {
+		created() {
 			// make axios call to API
 			// this url should be not hardcoded i think
             /* once we begin using VUEX this will be moved. to keep all api calls centralized */
