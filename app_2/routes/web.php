@@ -13,5 +13,7 @@
 
 Route::get('/', 'SinglePageAppController@books');
 Route::get('/book/{book}', 'SinglePageAppController@show');
+Route::get('/about-us', 'SinglePageAppController@blank');
+Route::get('contact-us', 'SinglePageAppController@blank');
 
 //Route::get('/books', 'SinglePageAppController@books');

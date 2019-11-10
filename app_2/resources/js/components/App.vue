@@ -5,17 +5,19 @@
             <div class="header" v-if="logoLink">
                 <!-- left blank for now -->
                 <img :src="logoLink" >
-                <div>Online Bookstore</div>
+                <!--<div>Online Bookstore</div>-->
             </div>
         </router-link>
         <ToolBarComponent></ToolBarComponent>
 
         <router-view></router-view>
+        <FooterComponent></FooterComponent>
     </div>
 </template>
 <script>
     import axios from 'axios';
     import ToolBarComponent from './ToolBarComponent';
+    import FooterComponent from './FooterComponent';
 
     export default {
         data() {
@@ -30,11 +32,15 @@
             });
         },
         components: {
-            ToolBarComponent
+            ToolBarComponent,
+            FooterComponent
         }
     }
 </script>
 <style>
+    body {
+        margin: 0;
+    }
     a {
         text-decoration: none;
     }
@@ -42,14 +48,14 @@
         width: 100%;
         border: 1px solid #ccc;
         background: #ccc;
-        height: 100px;
+        height: 300px;
         display: flex;
         font-family: sans-serif;
     }
     .header img {
-        width: 8%;
-        height: 100px;
-        object-fit: contain;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
         text-align: left;
     }
     .header div {

@@ -24,7 +24,7 @@ class SinglePageAppController extends Controller
 
     public function logo()
     {
-        return response()->json(asset('images/bookstore-logo.png'));
+        return response()->json(asset('images/booklogo.png'));
     }
 
     public function show(Books $book)
@@ -39,5 +39,20 @@ class SinglePageAppController extends Controller
     {
         $book->load('images');
         return response()->json($book);
+    }
+
+    public function apiMostRecent()
+    {
+        $mostRecent = Books::orderBy('id', 'DESC')
+            ->limit(10)
+            ->with('images')
+            ->get();
+
+        return response()->json($mostRecent);
+    }
+
+    public function blank()
+    {
+        return view('spa', ['data' => null]);
     }
 }
