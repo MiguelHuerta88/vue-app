@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container-holder">
 		<div class="img">
 			<img :src="book.images.url" v-if="book && book.images">
 		</div>
@@ -40,7 +40,7 @@
     }
 </script>
 <style scoped>
-	.container {
+	.container-holder {
 		width: 100%;
 		margin: 20px;
 		font-family: sans-serif;
@@ -73,5 +73,5 @@
     	font-size: 15px;
     	margin-top: 10px;
     }
-	
+
 </style>

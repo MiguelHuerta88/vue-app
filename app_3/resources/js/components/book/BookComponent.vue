@@ -1,12 +1,12 @@
 <template>
     <router-link :to="{name: 'book', params: {book: book.id}}" class="item">
-        <div class="container">
+        <div class="container-holder">
             <div class="img"><img v-if="book.images" :src="book.images.url"></div>
             <div class="content">
                 <div class="title"> {{ book.title }} </div>
                 <div class="author"> Author: {{ book.author }} </div>
                 <div class="published"> Published On: {{ book.published_on }} </div>
-            </div>       
+            </div>
         </div>
     </router-link>
 </template>
@@ -20,7 +20,7 @@
         text-decoration: none;
         color: #000;
     }
-    .container {
+    .container-holder {
         font-family: sans-serif;
         height: 200px;
         width: 100%;

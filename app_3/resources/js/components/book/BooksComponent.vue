@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="content">
         <div class="carousel-holder" v-if="books">
             <h2> Top Sellers </h2>
             <CarouselComponent :books="books"></CarouselComponent>
@@ -41,7 +41,7 @@
 	}
 </script>
 <style scoped>
-    .container {
+    .content{
         margin: 15px 20px;
         font-family: sans-serif;
     }

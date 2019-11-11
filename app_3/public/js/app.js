@@ -2204,7 +2204,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na[data-v-5eb8c1d9] {\n    text-decoration: none;\n    color: #000;\n}\n.container[data-v-5eb8c1d9] {\n    font-family: sans-serif;\n    height: 200px;\n    width: 100%;\n    display: -webkit-box;\n    display: flex;\n}\n.img img[data-v-5eb8c1d9] {\n    height: 200px;\n    width: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.content[data-v-5eb8c1d9] {\n    width: 350px;\n    margin: 10px 10px;\n    font-weight: 800;\n}\n.title[data-v-5eb8c1d9] {\n    font-style: italic;\n    text-transform: uppercase;\n    font-size: 18px;\n    margin-bottom: 40px;\n}\n.author[data-v-5eb8c1d9], .published[data-v-5eb8c1d9] {\n    font-size: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-5eb8c1d9] {\n    text-decoration: none;\n    color: #000;\n}\n.container-holder[data-v-5eb8c1d9] {\n    font-family: sans-serif;\n    height: 200px;\n    width: 100%;\n    display: -webkit-box;\n    display: flex;\n}\n.img img[data-v-5eb8c1d9] {\n    height: 200px;\n    width: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.content[data-v-5eb8c1d9] {\n    width: 350px;\n    margin: 10px 10px;\n    font-weight: 800;\n}\n.title[data-v-5eb8c1d9] {\n    font-style: italic;\n    text-transform: uppercase;\n    font-size: 18px;\n    margin-bottom: 40px;\n}\n.author[data-v-5eb8c1d9], .published[data-v-5eb8c1d9] {\n    font-size: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -2223,7 +2223,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-207957ad] {\n\t\twidth: 100%;\n\t\tmargin: 20px;\n\t\tfont-family: sans-serif;\n}\n.img[data-v-207957ad] {\n\t\twidth: 97%;\n\t\theight: 500px;\n\t\tmargin-bottom: 20px;\n}\n.img img[data-v-207957ad] {\n\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\t-o-object-fit: cover;\n\t\t\t   object-fit: cover;\n}\n.title[data-v-207957ad] {\n        font-style: italic;\n        text-transform: uppercase;\n        font-size: 25px;\n        font-weight: 800;\n        margin-bottom: 40px;\n}\n.author[data-v-207957ad], .published[data-v-207957ad], .description-label[data-v-207957ad] {\n        font-size: 15px;\n        font-weight: 700;\n}\n.description-label[data-v-207957ad] {\n    \tmargin-top: 20px;\n}\n.description[data-v-207957ad] {\n    \tfont-size: 15px;\n    \tmargin-top: 10px;\n}\n\t\n", ""]);
+exports.push([module.i, "\n.container-holder[data-v-207957ad] {\n\t\twidth: 100%;\n\t\tmargin: 20px;\n\t\tfont-family: sans-serif;\n}\n.img[data-v-207957ad] {\n\t\twidth: 97%;\n\t\theight: 500px;\n\t\tmargin-bottom: 20px;\n}\n.img img[data-v-207957ad] {\n\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\t-o-object-fit: cover;\n\t\t\t   object-fit: cover;\n}\n.title[data-v-207957ad] {\n        font-style: italic;\n        text-transform: uppercase;\n        font-size: 25px;\n        font-weight: 800;\n        margin-bottom: 40px;\n}\n.author[data-v-207957ad], .published[data-v-207957ad], .description-label[data-v-207957ad] {\n        font-size: 15px;\n        font-weight: 700;\n}\n.description-label[data-v-207957ad] {\n    \tmargin-top: 20px;\n}\n.description[data-v-207957ad] {\n    \tfont-size: 15px;\n    \tmargin-top: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -2242,7 +2242,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-71025efe] {\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.inventory .book-list[data-v-71025efe] {\n    margin:0;\n    padding: 0;\n    list-style-type: none;\n    list-style: none;\n}\nul.book-list li[data-v-71025efe] {\n        width: 100%;\n        border: 2px solid lightcoral;\n        margin-bottom: 30px;\n        border-radius: 3px;\n        -moz-border-radius: 3px;\n        -webkit-border-radius: 3px;\n        box-shadow:5px 10px #888888;\n        margin-bottom: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-71025efe]{\n    margin: 15px 20px;\n    font-family: sans-serif;\n}\n.inventory .book-list[data-v-71025efe] {\n    margin:0;\n    padding: 0;\n    list-style-type: none;\n    list-style: none;\n}\nul.book-list li[data-v-71025efe] {\n        width: 100%;\n        border: 2px solid lightcoral;\n        margin-bottom: 30px;\n        border-radius: 3px;\n        -moz-border-radius: 3px;\n        -webkit-border-radius: 3px;\n        box-shadow:5px 10px #888888;\n        margin-bottom: 20px;\n}\n", ""]);
 
 // exports
 
@@ -3790,7 +3790,7 @@ var render = function() {
   return _c("div", { staticClass: "form" }, [
     _c("h2", [_vm._v("Login")]),
     _vm._v(" "),
-    _c("form", [
+    _c("form", { attrs: { method: "post", action: "/login" } }, [
       _c("input", {
         attrs: { type: "hidden", name: "_token" },
         domProps: { value: _vm.csrf_token }
@@ -3898,7 +3898,7 @@ var render = function() {
       attrs: { to: { name: "book", params: { book: _vm.book.id } } }
     },
     [
-      _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "container-holder" }, [
         _c("div", { staticClass: "img" }, [
           _vm.book.images
             ? _c("img", { attrs: { src: _vm.book.images.url } })
@@ -3944,7 +3944,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-holder" }, [
     _c("div", { staticClass: "img" }, [
       _vm.book && _vm.book.images
         ? _c("img", { attrs: { src: _vm.book.images.url } })
@@ -3999,7 +3999,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "content" }, [
     _vm.books
       ? _c(
           "div",
