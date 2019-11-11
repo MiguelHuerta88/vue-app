@@ -21291,7 +21291,7 @@ var actions = {
   },
   mostRecent: function mostRecent(_ref3) {
     var commit = _ref3.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/most-recent').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/books/most-recent').then(function (response) {
       commit('UPDATE_MOST_RECENT', response.data);
     });
   }
