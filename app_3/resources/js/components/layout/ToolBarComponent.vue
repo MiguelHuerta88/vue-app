@@ -1,6 +1,6 @@
 <template>
 	<div class='container'>
-		<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Back</a>
+		<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Home</a>
 	</div>
 </template>
 <script>
@@ -13,7 +13,7 @@
 		methods: {
 			goBack() {
 				// will tap into the router instance
-				window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+				this.$router.push('/vue-app/app_3/public/');
 			}
 		}
 	}

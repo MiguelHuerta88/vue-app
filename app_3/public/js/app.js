@@ -1780,7 +1780,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api_BookApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/BookApi */ "./resources/js/api/BookApi.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -1797,26 +1797,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-var api = new _api_BookApi__WEBPACK_IMPORTED_MODULE_1__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       // this pulls the id from the route for us
       id: this.$route.params.book,
-      book: null //images: null
-
+      book: null
     };
   },
+  methods: {},
   created: function created() {
     var _this = this;
 
-    api.get('book/' + this.id).then(function (response) {
-      return _this.book = response.data;
+    // ping the API pull this book for us
+    this.$store.dispatch('viewedBook', this.id).then(function (response) {
+      _this.book = response;
     });
-    /*axios.get("/vue-app/app_3/public/api/book/" + this.id).then(response =>
-     this.book = response.data);*/
+    setTimeout(function () {
+      console.log(this.test);
+    }, 2000);
   },
   computed: {
+    test: function test() {
+      return this.$store.getters.getBookById(this.id);
+    },
     readablePublished: function readablePublished() {
       return new Date(this.book.published_on).toDateString();
     }
@@ -2040,7 +2044,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     goBack: function goBack() {
       // will tap into the router instance
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
+      this.$router.push('/vue-app/app_3/public/');
     }
   }
 });
@@ -4007,7 +4011,7 @@ var render = function() {
     _vm.showBackLink
       ? _c("a", { staticClass: "back", on: { click: _vm.goBack } }, [
           _c("i", { staticClass: "fa fa-angle-left" }),
-          _vm._v(" Back")
+          _vm._v(" Home")
         ])
       : _vm._e()
   ])
@@ -20183,57 +20187,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./resources/js/api/BookApi.js":
-/*!*************************************!*\
-  !*** ./resources/js/api/BookApi.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
- // this is the base uri and we pass in the remaining url
-
-var uri = "/vue-app/app_3/public/api/";
-
-var BookApi =
-/*#__PURE__*/
-function () {
-  function BookApi() {
-    _classCallCheck(this, BookApi);
-  } // silence is golden
-
-  /**
-   * get route wrapper for axios
-   * 
-   * @param path => string
-   * @return Promise
-   */
-
-
-  _createClass(BookApi, [{
-    key: "get",
-    value: function get(path) {
-      // use axios to pull the data
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + path);
-    }
-  }]);
-
-  return BookApi;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (BookApi);
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -21309,12 +21262,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   books: [],
-  mostRecentBooks: []
+  mostRecentBooks: [],
+  booksViewed: []
 }; // mutations as passed state, payload
 
-var mutations = {}; // actions are passed {{ commit }}, optional payload or context, payload
+var mutations = {
+  UPDATE_CURRENT_BOOK: function UPDATE_CURRENT_BOOK(state, payload) {
+    state.booksViewed[payload.id] = payload; //state.booksViewed.push(payload);
+  }
+}; // actions are passed {{ commit }}, optional payload or context, payload
 
-var actions = {};
+var actions = {
+  viewedBook: function viewedBook(_ref, bookId) {
+    var commit = _ref.commit;
+    return new Promise(function (resolve, reject) {
+      // we added async and awaits so that it makes is async
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/book/' + bookId).then(function (response) {
+        // commit
+        commit('UPDATE_CURRENT_BOOK', response.data);
+        resolve(response.data);
+      });
+    });
+  }
+};
 var getters = {
   getBooks: function getBooks(state) {
     return state.books;
@@ -21323,16 +21293,15 @@ var getters = {
     return state.mostRecentBooks;
   },
 
-  /*getBook(state) {
-  	return id => state.find(book => id === book.id);
-  }*/
-  getBook: function getBook(state) {
+  /* this method doesnt seem to work for me */
+  getBookById: function getBookById(state) {
     return function (id) {
-      return state.find(function (book) {
-        return id === book.id;
+      return state.booksViewed.find(function (book) {
+        parseInt(book.id) === parseInt(id);
       });
     };
-  }
+  } //book: state => state.current
+
 };
 var booksModule = {
   state: state,

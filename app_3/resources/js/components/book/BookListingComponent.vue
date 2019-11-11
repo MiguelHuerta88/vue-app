@@ -14,22 +14,24 @@
 </template>
 <script>
 	import axios from 'axios';
-    import BookApi from '../../api/BookApi';
+    import { mapGetters } from 'vuex';
 
-    const api = new BookApi();
     export default {
     	data() {
     		return {
     			// this pulls the id from the route for us
     			id : this.$route.params.book,
-    			book: null,
-    			//images: null
+                book: null
     		}
     	},
+        methods: {
+
+        },
         created() {
-            api.get('book/' + this.id).then(response => this.book = response.data);
-        	/*axios.get("/vue-app/app_3/public/api/book/" + this.id).then(response =>
-        	 this.book = response.data);*/
+            // ping the API pull this book for us. return the book to save and use
+            this.$store.dispatch('viewedBook',this.id).then((response) => {
+                this.book = response;
+            });
         },
         computed: {
         	readablePublished() {
