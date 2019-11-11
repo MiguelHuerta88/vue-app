@@ -25,14 +25,11 @@
     		}
     	},
         methods: {
-
         },
         created() {
             // ping the API pull this book for us. return the book to save and use
             this.$store.dispatch('viewedBook',this.id).then((response) => {
                 this.book = response;
-
-                console.log(this.$store.getters.getBooks());
             });
         },
         computed: {

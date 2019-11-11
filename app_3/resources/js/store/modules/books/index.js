@@ -11,7 +11,6 @@ const state = {
 const mutations = {
 	UPDATE_CURRENT_BOOK(state, payload) {
 		state.booksViewed[payload.id] = payload;
-		//state.booksViewed.push(payload);
 	}
 };
 
@@ -31,12 +30,12 @@ const actions = {
 };
 
 const getters = {
-	getBooks: state => state.booksViewed,
+	getBooks: state => state.books,
 	getMostRecentBooks: state => state.mostRecentBooks,
 	/* this method doesnt seem to work for me */
 	getBookById: (state) => (id) => {
     	return state.booksViewed.find(book => {
-    		parseInt(book.id) === parseInt(id)
+    		book.id === id
     	});
   	}
 	//book: state => state.current

@@ -1781,6 +1781,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1805,22 +1811,17 @@ __webpack_require__.r(__webpack_exports__);
       book: null
     };
   },
-  methods: {},
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getBookById', 'getBooks'])),
   created: function created() {
     var _this = this;
 
-    // ping the API pull this book for us
+    // ping the API pull this book for us. return the book to save and use
     this.$store.dispatch('viewedBook', this.id).then(function (response) {
-      _this.book = response;
+      //this.book = response;
+      _this.book = _this.getBookById(_this.id);
     });
-    setTimeout(function () {
-      console.log(this.test);
-    }, 2000);
   },
   computed: {
-    test: function test() {
-      return this.$store.getters.getBookById(this.id);
-    },
     readablePublished: function readablePublished() {
       return new Date(this.book.published_on).toDateString();
     }
@@ -21287,7 +21288,7 @@ var actions = {
 };
 var getters = {
   getBooks: function getBooks(state) {
-    return state.books;
+    return state.booksViewed;
   },
   getMostRecentBooks: function getMostRecentBooks(state) {
     return state.mostRecentBooks;
@@ -21297,7 +21298,7 @@ var getters = {
   getBookById: function getBookById(state) {
     return function (id) {
       return state.booksViewed.find(function (book) {
-        parseInt(book.id) === parseInt(id);
+        book.id === id;
       });
     };
   } //book: state => state.current
