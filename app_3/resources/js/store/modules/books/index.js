@@ -31,7 +31,7 @@ const actions = {
 };
 
 const getters = {
-	getBooks: state => state.books,
+	getBooks: state => state.booksViewed,
 	getMostRecentBooks: state => state.mostRecentBooks,
 	/* this method doesnt seem to work for me */
 	getBookById: (state) => (id) => {
