@@ -14,6 +14,9 @@ const mutations = {
 	},
 	UPDATE_BOOKS(state, payload) {
 		state.books = payload;
+	},
+	UPDATE_MOST_RECENT(state, payload) {
+		state.mostRecentBooks = payload;
 	}
 };
 
@@ -35,12 +38,17 @@ const actions = {
 		axios.get('/vue-app/app_3/public/api/books').then(response => {
 			commit('UPDATE_BOOKS', response.data);
 		});
+	},
+	mostRecent({ commit }) {
+		axios.get('/vue-app/app_3/public/api/books/most-recent').then(response => {
+			commit('UPDATE_MOST_RECENT', response.data);
+		});
 	}
 };
 
 const getters = {
-	getBooks: state => state.books,
-	getMostRecentBooks: state => state.mostRecentBooks,
+	books: state => state.books,
+	mostRecent: state => state.mostRecentBooks,
 	/* this method doesnt seem to work for me */
 	getBookById: (state) => (id) => {
     	return state.booksViewed.find(book => {

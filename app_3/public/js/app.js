@@ -1781,12 +1781,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -1811,14 +1805,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       book: null
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getBookById', 'getBooks'])),
+  methods: {},
   created: function created() {
     var _this = this;
 
     // ping the API pull this book for us. return the book to save and use
     this.$store.dispatch('viewedBook', this.id).then(function (response) {
-      //this.book = response;
-      _this.book = _this.getBookById(_this.id);
+      _this.book = response;
     });
   },
   computed: {
@@ -1841,8 +1834,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _carousel_CarouselComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../carousel/CarouselComponent */ "./resources/js/components/carousel/CarouselComponent.vue");
-/* harmony import */ var _BookComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookComponent */ "./resources/js/components/book/BookComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _carousel_CarouselComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../carousel/CarouselComponent */ "./resources/js/components/carousel/CarouselComponent.vue");
+/* harmony import */ var _BookComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BookComponent */ "./resources/js/components/book/BookComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1858,35 +1858,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      books: null,
-      mostRecent: null
-    };
-  },
   methods: {},
   created: function created() {
-    var _this = this;
+    if (!this.books.length) {
+      this.$store.dispatch('books');
+    }
 
-    // make axios call to API
-    // this url should be not hardcoded i think
-
-    /* once we begin using VUEX this will be moved. to keep all api calls centralized */
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/books').then(function (response) {
-      _this.books = response.data;
-    });
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/books/most-recent').then(function (response) {
-      _this.mostRecent = response.data;
-    });
+    if (!this.mostRecent.length) {
+      this.$store.dispatch('mostRecent');
+    }
   },
   components: {
-    CarouselComponent: _carousel_CarouselComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BookComponent: _BookComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
+    CarouselComponent: _carousel_CarouselComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BookComponent: _BookComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['books', 'mostRecent']))
 });
 
 /***/ }),
@@ -21269,7 +21260,13 @@ var state = {
 
 var mutations = {
   UPDATE_CURRENT_BOOK: function UPDATE_CURRENT_BOOK(state, payload) {
-    state.booksViewed[payload.id] = payload; //state.booksViewed.push(payload);
+    state.booksViewed[payload.id] = payload;
+  },
+  UPDATE_BOOKS: function UPDATE_BOOKS(state, payload) {
+    state.books = payload;
+  },
+  UPDATE_MOST_RECENT: function UPDATE_MOST_RECENT(state, payload) {
+    state.mostRecentBooks = payload;
   }
 }; // actions are passed {{ commit }}, optional payload or context, payload
 
@@ -21284,13 +21281,26 @@ var actions = {
         resolve(response.data);
       });
     });
+  },
+  books: function books(_ref2) {
+    var commit = _ref2.commit;
+    // pull the books
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/books').then(function (response) {
+      commit('UPDATE_BOOKS', response.data);
+    });
+  },
+  mostRecent: function mostRecent(_ref3) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/vue-app/app_3/public/api/most-recent').then(function (response) {
+      commit('UPDATE_MOST_RECENT', response.data);
+    });
   }
 };
 var getters = {
-  getBooks: function getBooks(state) {
-    return state.booksViewed;
+  books: function books(state) {
+    return state.books;
   },
-  getMostRecentBooks: function getMostRecentBooks(state) {
+  mostRecent: function mostRecent(state) {
     return state.mostRecentBooks;
   },
 

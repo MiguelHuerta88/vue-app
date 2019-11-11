@@ -20,28 +20,23 @@
     import BookComponent from './BookComponent';
 
 	export default{
-		data() {
-			return {
-				//books: null,
-                mostRecent: null,
-			}
-		},
         methods: {
         },
 		created() {
-            this.$store.dispatch('books');
+            if (!this.books.length) {
+                this.$store.dispatch('books');
+            }
 
-            /*axios.get('/vue-app/app_3/public/api/books/most-recent').then(response => {
-                this.mostRecent = response.data;
-            });*/
-
+            if (!this.mostRecent.length) {
+                this.$store.dispatch('mostRecent');
+            }
 		},
         components: {
             CarouselComponent,
             BookComponent
         },
         computed: {
-            ...mapGetters(['books'])
+            ...mapGetters(['books', 'mostRecent'])
         }
 	}
 </script>
