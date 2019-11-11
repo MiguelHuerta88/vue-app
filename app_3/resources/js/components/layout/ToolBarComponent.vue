@@ -1,13 +1,19 @@
 <template>
 	<div class='container'>
 		<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Home</a>
+
+		<router-link v-if="!loggedIn" :to="{name: 'login'}" class="u-btn u-right u-login">Login</router-link>
+		<router-link v-else :to="{name: 'logout'}" class="u-btn u-right u-logout">Log Out</router-link>
 	</div>
 </template>
-<script>
+<script>	
 	export default {
 		computed: {
 			showBackLink() {
 				return (this.$route.name != 'home') ? true : false;
+			},
+			loggedIn() {
+				return this.$store.getters.isLoggedIn
 			}
 		},
 		methods: {
@@ -15,14 +21,14 @@
 				// will tap into the router instance
 				this.$router.push('/vue-app/app_3/public/');
 			}
-		}
+		},
 	}
 </script>
 <style scoped>
 	.container {
 		font-family: sans-serif;
 		width: 100%;
-		margin: 10px 0;
+		margin: 10px auto;
 	}
 	.back {
 		cursor: pointer;
@@ -32,6 +38,19 @@
 		.back i {
 			font-weight: 700;
 			color: #006ba7;
-			margin-rigth: 5px;
+			margin-right: 5px;
 		}
+	.u-btn {
+		width: 80%;
+	}
+	.u-right {
+		text-align: right;
+		float:right;
+	}
+	.u-login {
+		color: #006ba7;
+	}
+	.u-logout {
+		color: red;
+	}
 </style>
