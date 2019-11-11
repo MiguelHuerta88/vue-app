@@ -15,34 +15,33 @@
 </template>
 <script>
 	import axios from 'axios';
+    import { mapGetters } from 'vuex';
     import CarouselComponent from '../carousel/CarouselComponent';
     import BookComponent from './BookComponent';
 
 	export default{
 		data() {
 			return {
-				books: null,
+				//books: null,
                 mostRecent: null,
 			}
 		},
         methods: {
         },
 		created() {
-			// make axios call to API
-			// this url should be not hardcoded i think
-            /* once we begin using VUEX this will be moved. to keep all api calls centralized */
-            axios.get('/vue-app/app_3/public/api/books').then(response => {
-                this.books = response.data;
-            });
+            this.$store.dispatch('books');
 
-            axios.get('/vue-app/app_3/public/api/books/most-recent').then(response => {
+            /*axios.get('/vue-app/app_3/public/api/books/most-recent').then(response => {
                 this.mostRecent = response.data;
-            });
+            });*/
 
 		},
         components: {
             CarouselComponent,
             BookComponent
+        },
+        computed: {
+            ...mapGetters(['books'])
         }
 	}
 </script>

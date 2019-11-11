@@ -11,6 +11,9 @@ const state = {
 const mutations = {
 	UPDATE_CURRENT_BOOK(state, payload) {
 		state.booksViewed[payload.id] = payload;
+	},
+	UPDATE_BOOKS(state, payload) {
+		state.books = payload;
 	}
 };
 
@@ -25,6 +28,12 @@ const actions = {
 
 				resolve(response.data);
 			});
+		});
+	},
+	books({ commit }) {
+		// pull the books
+		axios.get('/vue-app/app_3/public/api/books').then(response => {
+			commit('UPDATE_BOOKS', response.data);
 		});
 	}
 };
