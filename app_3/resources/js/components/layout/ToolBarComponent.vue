@@ -3,7 +3,7 @@
 		<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Home</a>
 
 		<router-link v-if="!loggedIn" :to="{name: 'login'}" class="u-btn u-right u-login">Login</router-link>
-		<router-link v-else :to="{name: 'logout'}" class="u-btn u-right u-logout">Log Out</router-link>
+		<a v-else @click="logout" class="u-btn u-right u-logout back">Log Out</a>
 	</div>
 </template>
 <script>	
@@ -20,8 +20,14 @@
 			goBack() {
 				// will tap into the router instance
 				this.$router.push('/vue-app/app_3/public/');
+			},
+			logout() {
+				this.$store.dispatch('logout');
 			}
 		},
+		created() {
+			this.$store.dispatch('isAuthenticated');
+		}
 	}
 </script>
 <style scoped>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -41,5 +43,30 @@ class LoginController extends Controller
     {
         // we are doing SPA
         return view('spa', ['data' => []]);
+    }
+
+    public function postLogin(LoginRequest $request)
+    {
+        // next we try to login the user
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return response()->json([
+                'errors' => []
+            ]);
+        } else {
+            return response()->json([
+                'errors' => [
+                    'notmatch' => 'Username/Password not matching'
+                ]
+            ]);
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(true);
     }
 }
