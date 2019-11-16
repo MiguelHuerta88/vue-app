@@ -5,6 +5,7 @@ import BookListingComponent from "../components/book/BookListingComponent";
 import ContactUsComponent from "../components/static/ContactUsComponent";
 import AboutUsComponent from "../components/static/AboutUsComponent";
 import LoginComponent from "../components/auth/LoginComponent";
+import RegisterComponent from "../components/auth/RegisterComponent";
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,11 @@ let router = new VueRouter({
             name: 'login',
             path: '/login',
             component: LoginComponent
+        },
+        {
+            name: 'register',
+            path: '/register',
+            component: RegisterComponent
         }
     ]
 });

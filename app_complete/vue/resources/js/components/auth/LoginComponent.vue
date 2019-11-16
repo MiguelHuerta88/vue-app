@@ -1,6 +1,6 @@
 <template>
 	<div class="form">
-		<h2>Login</h2>
+		<h2><span class="badge badge-secondary">Login</span></h2>
 		<span class='error' v-if="loginFailed">Username/Password not matching</span>
 		<form method="post" action="/login" @submit="submitEvent">
 		  <input type="hidden" name="_token" :value="csrf_token">

@@ -1,12 +1,12 @@
 <template>
 	<div class="content">
         <div class="carousel-holder" v-if="books">
-            <h2> Top Sellers </h2>
+            <h2> <span class="badge badge-secondary">Top Sellers</span> </h2>
             <CarouselComponent :books="books"></CarouselComponent>
         </div>
 
         <div class='inventory' v-if="mostRecent">
-            <h2> Most Recent Books</h2>
+            <h2> <span class="badge badge-secondary">Most Recent Books</span></h2>
             <ul class="book-list">
                 <li v-for="book in mostRecent"><BookComponent :key="book.id" :book="book"></BookComponent></li>
             </ul>
