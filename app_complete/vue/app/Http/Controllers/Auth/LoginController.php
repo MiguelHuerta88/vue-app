@@ -38,35 +38,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    public function login()
-    {
-        // we are doing SPA
-        return view('spa', ['data' => []]);
-    }
-
-    public function postLogin(LoginRequest $request)
-    {
-        // next we try to login the user
-        $credentials = $request->only('username', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return response()->json([
-                'errors' => []
-            ]);
-        } else {
-            return response()->json([
-                'errors' => [
-                    'notmatch' => 'Username/Password not matching'
-                ]
-            ]);
-        }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-
-        return response()->json(true);
-    }
 }

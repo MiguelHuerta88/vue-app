@@ -1816,7 +1816,7 @@ __webpack_require__.r(__webpack_exports__);
           return;
         } else {
           // send them home
-          _this.$router.push('/vue-app/app_3/public/');
+          _this.$router.push('/');
         }
       });
     },
@@ -1901,7 +1901,6 @@ __webpack_require__.r(__webpack_exports__);
 
     // ping the API pull this book for us. return the book to save and use
     this.$store.dispatch('viewedBook', this.id).then(function (response) {
-      console.log(response);
       _this.book = response;
     });
   },
@@ -22430,12 +22429,13 @@ var actions = {
 
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/login', fields).then(function (response) {
-        if (!Object.keys(response.data.errors).length) {
+        if (!Object.keys(response.data.data.errors).length) {
           commit('UPDATE_IS_LOGGED_IN', true);
         }
 
         commit('LOADING_COMPLETE');
-        resolve(response.data);
+        console.log(response);
+        resolve(response.data.data);
       });
     });
   },
@@ -22447,7 +22447,7 @@ var actions = {
           case 0:
             commit = _ref2.commit;
             axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/check/user').then(function (response) {
-              commit('UPDATE_IS_LOGGED_IN', response.data);
+              commit('UPDATE_IS_LOGGED_IN', response.data.data.isLoggedIn);
             });
 
           case 2:
@@ -22554,7 +22554,7 @@ var actions = {
             commit = _ref4.commit;
             _context.next = 3;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/logo').then(function (response) {
-              commit('UPDATE_LOGO', response.data.data);
+              commit('UPDATE_LOGO', response.data.data.logo);
             }));
 
           case 3:

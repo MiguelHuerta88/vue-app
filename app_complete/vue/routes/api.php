@@ -23,6 +23,6 @@ Route::get('/book/{book}', 'Api\BooksController@show');
 Route::get('/books/most-recent', 'Api\BooksController@mostRecent');
 
 // Auth routes
-Route::post('/login', 'Auth\LoginController@postLogin');
-Route::get('check/user', 'UserController@checkAuthApi');
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::post('/login', 'Api\UserController@login');
+Route::get('check/user', 'Api\UserController@userInfo');
+Route::get('/logout', 'Api\UserController@logout');

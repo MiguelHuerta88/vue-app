@@ -6,7 +6,7 @@
 		  <input type="hidden" name="_token" :value="csrf_token">
 		  <div class="form-group">
 		    <label for="exampleInputUsername1">Username</label>
-		    <input v-model="fields.username" type="text" class="form-control" id="exampleInputUsername1">
+		    <input v-model="fields.username" type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
 		    <span class='error'>{{ fieldErrors.username }} </span>
 		  </div>
 		  <div class="form-group">
@@ -53,7 +53,7 @@
 						return;
 					} else {
 						// send them home
-						this.$router.push('/vue-app/app_3/public/');
+						this.$router.push('/');
 					}
 
 				});

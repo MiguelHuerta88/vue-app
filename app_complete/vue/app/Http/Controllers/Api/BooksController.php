@@ -13,7 +13,7 @@ class BooksController extends Controller
 	/**
 	 * Return Books. JSON response
 	 *
-	 * @return     BooksCollection  ( description_of_the_return_value )
+	 * @return     BooksCollection
 	 */
     public function books()
     {
@@ -31,7 +31,9 @@ class BooksController extends Controller
     public function logo()
     {
         return response()->json([
-        	'data' => asset('images/booklogo.png')
+        	'data' => [
+                'logo' => asset('images/booklogo.png')
+            ]
         ]);
     }
 
@@ -47,6 +49,11 @@ class BooksController extends Controller
     	return new BooksResource($book);
     }
 
+    /**
+     * get most recent books
+     *
+     * @return     BooksCollection
+     */
     public function mostRecent()
     {
     	$mostRecent = Books::orderBy('id', 'DESC')

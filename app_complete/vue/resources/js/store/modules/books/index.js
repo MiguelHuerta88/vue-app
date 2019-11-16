@@ -51,7 +51,7 @@ const actions = {
 	},
 	async logo({ commit }) {
 		await axios.get('/api/logo').then(response => {
-			commit('UPDATE_LOGO', response.data.data);
+			commit('UPDATE_LOGO', response.data.data.logo);
         });
 	}
 };
