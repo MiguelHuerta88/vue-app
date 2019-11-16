@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', 'SinglePageAppController@books');
-Route::get('/book/{book}', 'SinglePageAppController@show');
-Route::get('/about-us', 'SinglePageAppController@blank');
-Route::get('contact-us', 'SinglePageAppController@blank');
-Route::get('/login', 'Auth\LoginController@login');
+Route::get('/', 'SinglePageAppController@index');
+Route::get('/book/{book}', 'SinglePageAppController@index');
+Route::get('/about-us', 'SinglePageAppController@index');
+Route::get('contact-us', 'SinglePageAppController@index');
+Route::get('/login', 'SinglePageAppController@index');
 
 //Route::get('/books', 'SinglePageAppController@books');

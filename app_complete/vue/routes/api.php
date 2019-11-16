@@ -17,10 +17,10 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::get('/books', 'SinglePageAppController@booksJson');
-Route::get('/logo', 'SinglePageAppController@logo');
-Route::get('/book/{book}', 'SinglePageAppController@apiShow');
-Route::get('/books/most-recent', 'SinglePageAppController@apiMostRecent');
+Route::get('/books', 'Api\BooksController@books');
+Route::get('/logo', 'Api\BooksController@logo');
+Route::get('/book/{book}', 'Api\BooksController@show');
+Route::get('/books/most-recent', 'Api\BooksController@mostRecent');
 
 // Auth routes
 Route::post('/login', 'Auth\LoginController@postLogin');
