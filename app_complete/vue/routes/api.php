@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+Route::get('/books', 'SinglePageAppController@booksJson');
+Route::get('/logo', 'SinglePageAppController@logo');
+Route::get('/book/{book}', 'SinglePageAppController@apiShow');
+Route::get('/books/most-recent', 'SinglePageAppController@apiMostRecent');
+
+// Auth routes
+Route::post('/login', 'Auth\LoginController@postLogin');
+Route::get('check/user', 'UserController@checkAuthApi');
+Route::get('/logout', 'Auth\LoginController@logout');
