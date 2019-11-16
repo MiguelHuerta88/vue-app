@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../config/";
 
 axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -8,7 +8,8 @@ axios.defaults.headers.common = {
 
 const state = {
 	isLoggedIn: false,
-	loading: false
+	loading: false,
+	user: {}
 };
 
 const mutations = {
@@ -20,6 +21,9 @@ const mutations = {
 	},
 	LOADING_COMPLETE (state) {
 		state.loading = false;
+	},
+	UPDATE_USER (state, payload) {
+		state.user = payload;
 	}
 };
 
@@ -48,11 +52,23 @@ const actions = {
 		axios.get(API_URL + '/api/logout').then(response => {
 			commit('UPDATE_IS_LOGGED_IN', false);
 		});
+	},
+	register({ commit }, fields) {
+		return new Promise((resolve, reject) => {
+			axios.post(API_URL + '/api/register', fields).then(response => {
+				// sucess
+				commit('UPDATE_USER', response.data);
+				return resolve(true);
+			}).catch(error =>{
+				return reject(error.response.data);
+			});
+		});
 	}
 };
 
 const getters = {
 	isLoggedIn: state => state.isLoggedIn,
+	user: state => state.user,
 };
 
 const authModule = {

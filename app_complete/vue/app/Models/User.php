@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'username', 'password', 'address', 'city', 'state', 'zipcode', 'created_at', 'updated_at', 'email_verified_at', 'email_token'
     ];
 
     /**
@@ -37,4 +37,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Scope by username function
+     *
+     * @param      QueryBuilder
+     * @param      string $username
+     *
+     * @return     QueryBuilder
+     */
+    public function scopeByUsername($query, $username)
+    {
+        return $query->where('username', $username);
+    }
+
+    /**
+     * scope by email verified
+     *
+     * @param      QueryBuilder
+     *
+     * @return     QueryBuilder
+     */
+    public function scopeNullEmailToken($query)
+    {
+        return $query->whereNull('email_token');
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -32,6 +33,17 @@ class UserController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        // before we try to log them in we need to make sure that this user has been verified
+        if (User::byUsername($request->get('username'))->notVerified()->count()) {
+            $errors['errors'] = [
+                'notmatch' => 'User has not verified email yet. Please check email'
+            ];
+
+            return response()->json([
+                'data' => $errors
+            ]);
+        }
+
     	// empty error array
     	$errors = array('errors' => []);
 

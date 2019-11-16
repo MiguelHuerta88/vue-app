@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('city', 100);
             $table->char('state', 2);
             $table->string('zipcode', 7);
+            $table->string('email_token', 256)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -26,3 +26,4 @@ Route::get('/books/most-recent', 'Api\BooksController@mostRecent');
 Route::post('/login', 'Api\UserController@login');
 Route::get('check/user', 'Api\UserController@userInfo');
 Route::get('/logout', 'Api\UserController@logout');
+Route::post('/register', 'Api\RegisterController@register');

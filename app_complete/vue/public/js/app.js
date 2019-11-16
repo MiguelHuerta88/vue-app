@@ -1796,23 +1796,30 @@ __webpack_require__.r(__webpack_exports__);
         username: undefined,
         password: undefined
       },
-      loginFailed: false
+      loginFailed: false,
+      disableBtn: false
     };
   },
   methods: {
     submitEvent: function submitEvent(evt) {
       var _this = this;
 
-      evt.preventDefault(); // validate
+      evt.preventDefault();
+      this.disableBtn = true; // validate
 
       this.fieldErrors = this.validateForm(this.fields); // check if we have any errors
 
-      if (Object.keys(this.fieldErrors).length) return; // otherwise continue and send the request to backend
+      if (Object.keys(this.fieldErrors).length) {
+        this.disableBtn = false;
+        return;
+      } // otherwise continue and send the request to backend
+
 
       this.$store.dispatch('login', this.fields).then(function (response) {
         if (Object.keys(response.errors).length) {
           // not successful login
           _this.loginFailed = true;
+          _this.disableBtn = false;
           return;
         } else {
           // send them home
@@ -1841,6 +1848,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_states_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config/states.js */ "./resources/js/config/states.js");
 //
 //
 //
@@ -1892,12 +1900,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      csrf_token: window.document.head.querySelector('meta[name="csrf-token"]').content,
       fields: {
-        firstName: null,
-        lastName: null,
+        first_name: null,
+        last_name: null,
         email: null,
         username: null,
         password: null,
@@ -1905,8 +1946,68 @@ __webpack_require__.r(__webpack_exports__);
         city: null,
         state: null,
         zipcode: null
-      }
+      },
+      fieldErrors: {
+        first_name: undefined,
+        last_name: undefined,
+        email: undefined,
+        username: undefined,
+        password: undefined,
+        address: undefined,
+        city: undefined,
+        state: undefined,
+        zipcode: undefined
+      },
+      states: _config_states_js__WEBPACK_IMPORTED_MODULE_0__["STATES_LIST"],
+      disableBtn: false
     };
+  },
+  methods: {
+    submit: function submit(evt) {
+      var _this = this;
+
+      this.disableBtn = true;
+      evt.preventDefault();
+      this.fieldErrors = this.validate(this.fields); // next check for errors
+
+      if (Object.keys(this.fieldErrors).length) {
+        // turn the button on again
+        this.disableBtn = false;
+        return;
+      } // otherwise dispatch the call to vuex
+
+
+      this.$store.dispatch('register', this.fields).then(function (response) {
+        // at this point everything should be successful
+        _this.$route.push('thank-you');
+      })["catch"](function (error) {
+        _this.processErrors(error.errors);
+
+        _this.disableBtn = false;
+      });
+    },
+    processErrors: function processErrors(errors) {
+      var _this2 = this;
+
+      Object.keys(errors).forEach(function (item) {
+        _this2.fieldErrors[item] = errors[item].pop();
+      });
+    },
+    validate: function validate(fields) {
+      /* validation should really be better. Unless the response from API will contain the array of errors from backend */
+      var errors = {}; // begin checking all the fields
+
+      if (!fields.first_name) errors.first_name = "First Name Required!";
+      if (!fields.last_name) errors.last_name = "Last Name Required!";
+      if (!fields.email) errors.email = "Email Required!";
+      if (!fields.username) errors.username = "Username Required!";
+      if (!fields.password) errors.password = "Password Required!";
+      if (!fields.address) errors.address = "Address Required!";
+      if (!fields.city) errors.city = "City Required!";
+      if (!fields.state) errors.state = "State Required!";
+      if (!fields.zipcode) errors.zipcode = "Zipcode Required!";
+      return errors;
+    }
   }
 });
 
@@ -4808,7 +4909,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit", disable: _vm.disableBtn }
+          },
           [_vm._v("Submit")]
         )
       ]
@@ -4849,7 +4953,12 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("form", [
+    _c("form", { on: { submit: _vm.submit } }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf_token }
+      }),
+      _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
         _c("div", { staticClass: "form-group col-md-6" }, [
           _c("label", { attrs: { for: "first_name" } }, [_vm._v("First Name")]),
@@ -4859,58 +4968,78 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.firstName,
-                expression: "firstName"
+                value: _vm.fields.first_name,
+                expression: "fields.first_name"
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.fieldErrors.first_name },
             attrs: {
               name: "first_name",
               type: "text",
-              placeholder: "First Name",
-              required: ""
+              placeholder: "First Name"
             },
-            domProps: { value: _vm.firstName },
+            domProps: { value: _vm.fields.first_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.firstName = $event.target.value
+                _vm.$set(_vm.fields, "first_name", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.first_name
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.fieldErrors.first_name) +
+                    "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-6" }, [
-          _c("label", { attrs: { for: "last_name" } }, [_vm._v("First Name")]),
+          _c("label", { attrs: { for: "last_name" } }, [_vm._v("Last Name")]),
           _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.lastName,
-                expression: "lastName"
+                value: _vm.fields.last_name,
+                expression: "fields.last_name"
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.fieldErrors.lastName },
             attrs: {
               name: "last_name",
               type: "text",
-              placeholder: "Last Name",
-              required: ""
+              placeholder: "Last Name"
             },
-            domProps: { value: _vm.lastName },
+            domProps: { value: _vm.fields.last_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.lastName = $event.target.value
+                _vm.$set(_vm.fields, "last_name", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.last_name
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.fieldErrors.last_name) +
+                    "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -4920,20 +5049,37 @@ var render = function() {
         _c("input", {
           directives: [
             {
-              name: "mode",
-              rawName: "v-mode",
-              value: _vm.email,
-              expression: "email"
+              name: "model",
+              rawName: "v-model",
+              value: _vm.fields.email,
+              expression: "fields.email"
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": _vm.fieldErrors.email },
           attrs: {
             name: "email",
             type: "email",
-            placeholder: "example@example.com",
-            required: ""
+            placeholder: "example@example.com"
+          },
+          domProps: { value: _vm.fields.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.fields, "email", $event.target.value)
+            }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.fieldErrors.email
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n\t\t\t\t\t" + _vm._s(_vm.fieldErrors.email) + "\n\t\t\t"
+              )
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
@@ -4945,27 +5091,33 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.username,
-                expression: "username"
+                value: _vm.fields.username,
+                expression: "fields.username"
               }
             ],
             staticClass: "form-control",
-            attrs: {
-              name: "username",
-              type: "text",
-              placeholder: "Username",
-              required: ""
-            },
-            domProps: { value: _vm.username },
+            class: { "is-invalid": _vm.fieldErrors.username },
+            attrs: { name: "username", type: "text", placeholder: "Username" },
+            domProps: { value: _vm.fields.username },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.username = $event.target.value
+                _vm.$set(_vm.fields, "username", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.username
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.fieldErrors.username) +
+                    "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-6" }, [
@@ -4974,20 +5126,39 @@ var render = function() {
           _c("input", {
             directives: [
               {
-                name: "mode",
-                rawName: "v-mode",
-                value: _vm.password,
-                expression: "password"
+                name: "model",
+                rawName: "v-model",
+                value: _vm.fields.password,
+                expression: "fields.password"
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.fieldErrors.password },
             attrs: {
               type: "password",
               name: "password",
-              required: "",
               placeholder: "Password"
+            },
+            domProps: { value: _vm.fields.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.fields, "password", $event.target.value)
+              }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.password
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.fieldErrors.password) +
+                    "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -4997,20 +5168,37 @@ var render = function() {
         _c("input", {
           directives: [
             {
-              name: "mode",
-              rawName: "v-mode",
-              value: _vm.address,
-              expression: "address"
+              name: "model",
+              rawName: "v-model",
+              value: _vm.fields.address,
+              expression: "fields.address"
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": _vm.fieldErrors.address },
           attrs: {
             type: "text",
             name: "address",
-            placeholder: "123 Apple St.",
-            required: ""
+            placeholder: "123 Apple St."
+          },
+          domProps: { value: _vm.fields.address },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.fields, "address", $event.target.value)
+            }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.fieldErrors.address
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n\t\t\t\t\t" + _vm._s(_vm.fieldErrors.address) + "\n\t\t\t"
+              )
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
@@ -5022,59 +5210,83 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.address,
-                expression: "address"
+                value: _vm.fields.city,
+                expression: "fields.city"
               }
             ],
             staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "city",
-              required: "",
-              placeholder: "Los Angeles"
-            },
-            domProps: { value: _vm.address },
+            class: { "is-invalid": _vm.fieldErrors.city },
+            attrs: { type: "text", name: "city", placeholder: "Los Angeles" },
+            domProps: { value: _vm.fields.city },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.address = $event.target.value
+                _vm.$set(_vm.fields, "city", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.city
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" + _vm._s(_vm.fieldErrors.city) + "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { attrs: { for: "state" } }, [_vm._v("State")]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.address,
-                expression: "address"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "state",
-              required: "",
-              placeholder: "CA",
-              maxlength: "2"
-            },
-            domProps: { value: _vm.address },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fields.state,
+                  expression: "fields.state"
                 }
-                _vm.address = $event.target.value
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.fieldErrors.state },
+              attrs: { name: "state" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.fields,
+                    "state",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
               }
-            }
-          })
+            },
+            _vm._l(_vm.states, function(s) {
+              return _c("option", { domProps: { value: s.abbreviation } }, [
+                _vm._v(_vm._s(s.name))
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _vm.fieldErrors.state
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" + _vm._s(_vm.fieldErrors.state) + "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
@@ -5085,34 +5297,47 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.zipcode,
-                expression: "zipcode"
+                value: _vm.fields.zipcode,
+                expression: "fields.zipcode"
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.fieldErrors.zipcode },
             attrs: {
               type: "text",
               name: "zipcode",
-              required: "",
               placeholder: "90023",
               maxlength: "7"
             },
-            domProps: { value: _vm.zipcode },
+            domProps: { value: _vm.fields.zipcode },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.zipcode = $event.target.value
+                _vm.$set(_vm.fields, "zipcode", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.fieldErrors.zipcode
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.fieldErrors.zipcode) +
+                    "\n\t\t\t\t"
+                )
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", disabled: _vm.disableBtn }
+        },
         [_vm._v("Submit")]
       )
     ])
@@ -22863,6 +23088,197 @@ var API_URL = "//dev.bookstore.com";
 
 /***/ }),
 
+/***/ "./resources/js/config/states.js":
+/*!***************************************!*\
+  !*** ./resources/js/config/states.js ***!
+  \***************************************/
+/*! exports provided: STATES_LIST */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATES_LIST", function() { return STATES_LIST; });
+var STATES_LIST = [{
+  "name": "Alabama",
+  "abbreviation": "AL"
+}, {
+  "name": "Alaska",
+  "abbreviation": "AK"
+}, {
+  "name": "American Samoa",
+  "abbreviation": "AS"
+}, {
+  "name": "Arizona",
+  "abbreviation": "AZ"
+}, {
+  "name": "Arkansas",
+  "abbreviation": "AR"
+}, {
+  "name": "California",
+  "abbreviation": "CA"
+}, {
+  "name": "Colorado",
+  "abbreviation": "CO"
+}, {
+  "name": "Connecticut",
+  "abbreviation": "CT"
+}, {
+  "name": "Delaware",
+  "abbreviation": "DE"
+}, {
+  "name": "District Of Columbia",
+  "abbreviation": "DC"
+}, {
+  "name": "Federated States Of Micronesia",
+  "abbreviation": "FM"
+}, {
+  "name": "Florida",
+  "abbreviation": "FL"
+}, {
+  "name": "Georgia",
+  "abbreviation": "GA"
+}, {
+  "name": "Guam",
+  "abbreviation": "GU"
+}, {
+  "name": "Hawaii",
+  "abbreviation": "HI"
+}, {
+  "name": "Idaho",
+  "abbreviation": "ID"
+}, {
+  "name": "Illinois",
+  "abbreviation": "IL"
+}, {
+  "name": "Indiana",
+  "abbreviation": "IN"
+}, {
+  "name": "Iowa",
+  "abbreviation": "IA"
+}, {
+  "name": "Kansas",
+  "abbreviation": "KS"
+}, {
+  "name": "Kentucky",
+  "abbreviation": "KY"
+}, {
+  "name": "Louisiana",
+  "abbreviation": "LA"
+}, {
+  "name": "Maine",
+  "abbreviation": "ME"
+}, {
+  "name": "Marshall Islands",
+  "abbreviation": "MH"
+}, {
+  "name": "Maryland",
+  "abbreviation": "MD"
+}, {
+  "name": "Massachusetts",
+  "abbreviation": "MA"
+}, {
+  "name": "Michigan",
+  "abbreviation": "MI"
+}, {
+  "name": "Minnesota",
+  "abbreviation": "MN"
+}, {
+  "name": "Mississippi",
+  "abbreviation": "MS"
+}, {
+  "name": "Missouri",
+  "abbreviation": "MO"
+}, {
+  "name": "Montana",
+  "abbreviation": "MT"
+}, {
+  "name": "Nebraska",
+  "abbreviation": "NE"
+}, {
+  "name": "Nevada",
+  "abbreviation": "NV"
+}, {
+  "name": "New Hampshire",
+  "abbreviation": "NH"
+}, {
+  "name": "New Jersey",
+  "abbreviation": "NJ"
+}, {
+  "name": "New Mexico",
+  "abbreviation": "NM"
+}, {
+  "name": "New York",
+  "abbreviation": "NY"
+}, {
+  "name": "North Carolina",
+  "abbreviation": "NC"
+}, {
+  "name": "North Dakota",
+  "abbreviation": "ND"
+}, {
+  "name": "Northern Mariana Islands",
+  "abbreviation": "MP"
+}, {
+  "name": "Ohio",
+  "abbreviation": "OH"
+}, {
+  "name": "Oklahoma",
+  "abbreviation": "OK"
+}, {
+  "name": "Oregon",
+  "abbreviation": "OR"
+}, {
+  "name": "Palau",
+  "abbreviation": "PW"
+}, {
+  "name": "Pennsylvania",
+  "abbreviation": "PA"
+}, {
+  "name": "Puerto Rico",
+  "abbreviation": "PR"
+}, {
+  "name": "Rhode Island",
+  "abbreviation": "RI"
+}, {
+  "name": "South Carolina",
+  "abbreviation": "SC"
+}, {
+  "name": "South Dakota",
+  "abbreviation": "SD"
+}, {
+  "name": "Tennessee",
+  "abbreviation": "TN"
+}, {
+  "name": "Texas",
+  "abbreviation": "TX"
+}, {
+  "name": "Utah",
+  "abbreviation": "UT"
+}, {
+  "name": "Vermont",
+  "abbreviation": "VT"
+}, {
+  "name": "Virgin Islands",
+  "abbreviation": "VI"
+}, {
+  "name": "Virginia",
+  "abbreviation": "VA"
+}, {
+  "name": "Washington",
+  "abbreviation": "WA"
+}, {
+  "name": "West Virginia",
+  "abbreviation": "WV"
+}, {
+  "name": "Wisconsin",
+  "abbreviation": "WI"
+}, {
+  "name": "Wyoming",
+  "abbreviation": "WY"
+}];
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -22916,6 +23332,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     name: 'register',
     path: '/register',
     component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }, {
+    name: 'thank-you',
+    path: '/thank-you',
+    component: ConfirmationComponent
   }]
 });
 /*router.beforeEach((to, from, next) => {
@@ -22968,7 +23388,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
+/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../config/ */ "./resources/js/config/index.js");
 
 
 
@@ -22978,7 +23398,8 @@ axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.headers.common = {
 };
 var state = {
   isLoggedIn: false,
-  loading: false
+  loading: false,
+  user: {}
 };
 var mutations = {
   UPDATE_IS_LOGGED_IN: function UPDATE_IS_LOGGED_IN(state, payload) {
@@ -22989,6 +23410,9 @@ var mutations = {
   },
   LOADING_COMPLETE: function LOADING_COMPLETE(state) {
     state.loading = false;
+  },
+  UPDATE_USER: function UPDATE_USER(state, payload) {
+    state.user = payload;
   }
 };
 var actions = {
@@ -23000,7 +23424,7 @@ var actions = {
        422 response */
 
     return new Promise(function (resolve, reject) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/login', fields).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/login', fields).then(function (response) {
         if (!Object.keys(response.data.data.errors).length) {
           commit('UPDATE_IS_LOGGED_IN', true);
         }
@@ -23017,7 +23441,7 @@ var actions = {
         switch (_context.prev = _context.next) {
           case 0:
             commit = _ref2.commit;
-            axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/check/user').then(function (response) {
+            axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/check/user').then(function (response) {
               commit('UPDATE_IS_LOGGED_IN', response.data.data.isLoggedIn);
             });
 
@@ -23030,14 +23454,29 @@ var actions = {
   },
   logout: function logout(_ref3) {
     var commit = _ref3.commit;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/logout').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/logout').then(function (response) {
       commit('UPDATE_IS_LOGGED_IN', false);
+    });
+  },
+  register: function register(_ref4, fields) {
+    var commit = _ref4.commit;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/register', fields).then(function (response) {
+        // sucess
+        commit('UPDATE_USER', response.data);
+        return resolve(true);
+      })["catch"](function (error) {
+        return reject(error.response.data);
+      });
     });
   }
 };
 var getters = {
   isLoggedIn: function isLoggedIn(state) {
     return state.isLoggedIn;
+  },
+  user: function user(state) {
+    return state.user;
   }
 };
 var authModule = {

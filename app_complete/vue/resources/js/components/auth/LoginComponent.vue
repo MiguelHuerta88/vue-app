@@ -14,7 +14,7 @@
 		    <input v-model="fields.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 		    <span class='error'>{{ fieldErrors.password }} </span>
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary" :disable="disableBtn">Submit</button>
 		</form>
 	</div>
 </template>
@@ -32,24 +32,30 @@
 					username: undefined,
 					password: undefined,
 				},
-				loginFailed: false
+				loginFailed: false,
+				disableBtn: false
 			}
 		},
 		methods: {
 			submitEvent(evt) {
 				evt.preventDefault();
+				this.disableBtn = true;
 
 				// validate
 				this.fieldErrors = this.validateForm(this.fields);
 
 				// check if we have any errors
-				if (Object.keys(this.fieldErrors).length) return;
+				if (Object.keys(this.fieldErrors).length) {
+					this.disableBtn = false;
+					return;
+				}
 
 				// otherwise continue and send the request to backend
 				this.$store.dispatch('login', this.fields).then(response => {
 					if (Object.keys(response.errors).length) {
 						// not successful login
 						this.loginFailed =true;
+						this.disableBtn = false;
 						return;
 					} else {
 						// send them home

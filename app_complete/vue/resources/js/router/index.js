@@ -41,6 +41,11 @@ let router = new VueRouter({
             name: 'register',
             path: '/register',
             component: RegisterComponent
+        },
+        {
+            name: 'thank-you',
+            path: '/thank-you',
+            component: ConfirmationComponent
         }
     ]
 });

@@ -12,7 +12,7 @@ folders:
 sites:
     -
         map: dev.bookstore.com
-        to: /home/vagrant/code/public
+        to: /home/vagrant/code/public/
 databases:
     - bookstore
 features:
