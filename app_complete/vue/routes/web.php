@@ -18,5 +18,6 @@ Route::get('contact-us', 'SinglePageAppController@index');
 Route::get('/login', 'SinglePageAppController@index');
 Route::get('/register', 'SinglePageAppController@index');
 Route::get('/thank-you', 'SinglePageAppController@index');
+Route::get('/activate/{token}', 'SinglePageAppController@index')->name('activate.user');
 
 //Route::get('/books', 'SinglePageAppController@books');
