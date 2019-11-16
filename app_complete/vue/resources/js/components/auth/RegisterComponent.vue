@@ -128,7 +128,7 @@
 				// otherwise dispatch the call to vuex
 				this.$store.dispatch('register', this.fields).then(response => {
 					// at this point everything should be successful
-					this.$route.push('thank-you');
+					this.$router.push('/thank-you');
 				}).catch(error => {
 					this.processErrors(error.errors);
 					this.disableBtn = false;

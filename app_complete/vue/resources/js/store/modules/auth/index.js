@@ -56,8 +56,8 @@ const actions = {
 	register({ commit }, fields) {
 		return new Promise((resolve, reject) => {
 			axios.post(API_URL + '/api/register', fields).then(response => {
-				// sucess
-				commit('UPDATE_USER', response.data);
+				// sucess. update user but dont update is logged in since user has to verify
+				commit('UPDATE_USER', response.data.data);
 				return resolve(true);
 			}).catch(error =>{
 				return reject(error.response.data);

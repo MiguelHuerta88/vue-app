@@ -6,6 +6,8 @@ import ContactUsComponent from "../components/static/ContactUsComponent";
 import AboutUsComponent from "../components/static/AboutUsComponent";
 import LoginComponent from "../components/auth/LoginComponent";
 import RegisterComponent from "../components/auth/RegisterComponent";
+import ConfirmationComponent from "../components/auth/ConfirmationComponent";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -45,7 +47,15 @@ let router = new VueRouter({
         {
             name: 'thank-you',
             path: '/thank-you',
-            component: ConfirmationComponent
+            component: ConfirmationComponent,
+            beforeEnter: (to, from, next) => {
+                // we need to check the vuex for a user
+                if (!Object.keys(store.getters.user).length) {
+                    next("/");
+                } {
+                    next();
+                }
+            }
         }
     ]
 });

@@ -17,6 +17,6 @@ Route::get('/about-us', 'SinglePageAppController@index');
 Route::get('contact-us', 'SinglePageAppController@index');
 Route::get('/login', 'SinglePageAppController@index');
 Route::get('/register', 'SinglePageAppController@index');
-
+Route::get('/thank-you', 'SinglePageAppController@index');
 
 //Route::get('/books', 'SinglePageAppController@books');

@@ -7,12 +7,14 @@ keys:
     - ~/.ssh/id_rsa
 folders:
     -
-        map: ./vue
-        to: /home/vagrant/code
+        map: ./vue/
+        to: /var/www/sites/vue
+        #to: /home/vagrant/code/
 sites:
     -
         map: dev.bookstore.com
-        to: /home/vagrant/code/public/
+        to: /var/www/sites/vue/public
+        #to: /home/vagrant/code/public/
 databases:
     - bookstore
 features:

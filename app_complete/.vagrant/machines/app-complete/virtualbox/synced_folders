@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/miguelhuerta/Desktop/code/vue-app/app_complete","disabled":false,"__vagrantfile":true}},"nfs":{}}
+{"virtualbox":{"/var/www/sites/vue":{"type":null,"mount_options":["uid=1000","gid=1000"],"guestpath":"/var/www/sites/vue","hostpath":"/Users/miguelhuerta/Desktop/code/vue-app/app_complete/vue","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/miguelhuerta/Desktop/code/vue-app/app_complete","disabled":false,"__vagrantfile":true}}}
