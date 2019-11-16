@@ -1901,6 +1901,7 @@ __webpack_require__.r(__webpack_exports__);
 
     // ping the API pull this book for us. return the book to save and use
     this.$store.dispatch('viewedBook', this.id).then(function (response) {
+      console.log(response);
       _this.book = response;
     });
   },
@@ -22526,8 +22527,8 @@ var actions = {
       // we added async and awaits so that it makes is async
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/book/' + bookId).then(function (response) {
         // commit
-        commit('UPDATE_CURRENT_BOOK', response.data);
-        resolve(response.data);
+        commit('UPDATE_CURRENT_BOOK', response.data.data);
+        resolve(response.data.data);
       });
     });
   },
@@ -22535,13 +22536,13 @@ var actions = {
     var commit = _ref2.commit;
     // pull the books
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/books').then(function (response) {
-      commit('UPDATE_BOOKS', response.data);
+      commit('UPDATE_BOOKS', response.data.data);
     });
   },
   mostRecent: function mostRecent(_ref3) {
     var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config__WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/books/most-recent').then(function (response) {
-      commit('UPDATE_MOST_RECENT', response.data);
+      commit('UPDATE_MOST_RECENT', response.data.data);
     });
   },
   logo: function logo(_ref4) {
@@ -22553,7 +22554,7 @@ var actions = {
             commit = _ref4.commit;
             _context.next = 3;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/logo').then(function (response) {
-              commit('UPDATE_LOGO', response.data);
+              commit('UPDATE_LOGO', response.data.data);
             }));
 
           case 3:

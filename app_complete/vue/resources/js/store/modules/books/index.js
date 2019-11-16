@@ -32,26 +32,26 @@ const actions = {
 			// we added async and awaits so that it makes is async
 			axios.get(API_URL + '/api/book/' + bookId).then(response => {
 				// commit
-				commit('UPDATE_CURRENT_BOOK', response.data);
+				commit('UPDATE_CURRENT_BOOK', response.data.data);
 
-				resolve(response.data);
+				resolve(response.data.data);
 			});
 		});
 	},
 	books({ commit }) {
 		// pull the books
 		axios.get(API_URL + '/api/books').then(response => {
-			commit('UPDATE_BOOKS', response.data);
+			commit('UPDATE_BOOKS', response.data.data);
 		});
 	},
 	mostRecent({ commit }) {
 		axios.get(API_URL + '/api/books/most-recent').then(response => {
-			commit('UPDATE_MOST_RECENT', response.data);
+			commit('UPDATE_MOST_RECENT', response.data.data);
 		});
 	},
 	async logo({ commit }) {
 		await axios.get('/api/logo').then(response => {
-			commit('UPDATE_LOGO', response.data);
+			commit('UPDATE_LOGO', response.data.data);
         });
 	}
 };

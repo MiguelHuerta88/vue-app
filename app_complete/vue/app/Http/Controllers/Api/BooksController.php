@@ -30,7 +30,9 @@ class BooksController extends Controller
      */
     public function logo()
     {
-        return response()->json(asset('images/booklogo.png'));
+        return response()->json([
+        	'data' => asset('images/booklogo.png')
+        ]);
     }
 
     /**
