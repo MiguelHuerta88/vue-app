@@ -8,9 +8,9 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\Users as UsersResource;
 use App\Models\User;
 use Hash;
-use Mail;
-use App\Mail\UserRegistered;
 use Illuminate\Support\Str;
+use App\Mail\UserRegistered;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -23,8 +23,8 @@ class RegisterController extends Controller
     	$attributes['email_token'] = Str::random(256);
     	$user = User::create($attributes);
 
-    	// send email
-    	Mail::to($user)->send(new UserRegistered($user));
+        Mail::to($user)->send(new UserRegistered($user));
+
 
     	return new UsersResource($user);
     }
