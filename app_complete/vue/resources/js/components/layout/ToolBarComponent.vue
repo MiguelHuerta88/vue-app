@@ -1,13 +1,20 @@
 <template>
 	<div class='container'>
-		<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Home</a>
-
-		<router-link v-if="!loggedIn" :to="{name: 'login'}" class="u-btn u-right u-login">Login</router-link>
-
-		<router-link v-if="loggedIn" :to="{name: 'settings'}">Account Settings</router-link>
-
-		<router-link v-if="!loggedIn" :to="{name: 'register'}" class='u-btn u-right'>Register</router-link>
-		<a v-else @click="logout" class="u-btn u-right u-logout back">Log Out</a>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class='back' @click="goBack" v-if="showBackLink"><i class="fa fa-angle-left"></i> Home</a>
+			</li>
+			<li class="nav-item">
+				<router-link v-if="!loggedIn" :to="{name: 'login'}" class="u-btn u-right u-login">Login</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link v-if="loggedIn" :to="{name: 'settings'}">Account Settings</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link v-if="!loggedIn" :to="{name: 'register'}" class='u-btn u-right'>Register</router-link>
+				<a v-else @click="logout" class="u-btn u-right u-logout back">Log Out</a>
+			</li>
+		</ul>
 	</div>
 </template>
 <script>	

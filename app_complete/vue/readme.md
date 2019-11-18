@@ -1,3 +1,15 @@
+Simple Vue.js Bookstore App.
+
+- SPA application. All routes inside web.php just render out to a simple template. The heavy lifting is done with Vuex.
+- Auth layer is also included. Login/Logout and Registration is currently working
+- Pulling records and storing them into Vuex is also working.
+
+# app_complete is running on homesteam. So you will need to cd into app_complete/ and run vagrant up.
+# after machine is up you need to ssh into the Vm and head over to /var/www/sites/vue/public and run php artisan migrate --seed to get dummy data populated
+
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

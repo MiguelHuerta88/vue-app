@@ -70,7 +70,6 @@
 				}
 			},
 			processStep2() {
-				console.log('inside step 2');
 				// step 2 requires removing the email_token from user record.
 				this.$store.dispatch('activateUser').then(response => {
 					this.process(this.step, this.next);

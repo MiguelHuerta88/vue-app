@@ -1837,8 +1837,7 @@ var MAX_STEPS = 3;
     processStep2: function processStep2() {
       var _this2 = this;
 
-      console.log('inside step 2'); // step 2 requires removing the email_token from user record.
-
+      // step 2 requires removing the email_token from user record.
       this.$store.dispatch('activateUser').then(function (response) {
         _this2.process(_this2.step, _this2.next);
       });
@@ -2447,6 +2446,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6089,54 +6095,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _vm.showBackLink
-        ? _c("a", { staticClass: "back", on: { click: _vm.goBack } }, [
-            _c("i", { staticClass: "fa fa-angle-left" }),
-            _vm._v(" Home")
-          ])
-        : _vm._e(),
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "nav" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _vm.showBackLink
+          ? _c("a", { staticClass: "back", on: { click: _vm.goBack } }, [
+              _c("i", { staticClass: "fa fa-angle-left" }),
+              _vm._v(" Home")
+            ])
+          : _vm._e()
+      ]),
       _vm._v(" "),
-      !_vm.loggedIn
-        ? _c(
-            "router-link",
-            {
-              staticClass: "u-btn u-right u-login",
-              attrs: { to: { name: "login" } }
-            },
-            [_vm._v("Login")]
-          )
-        : _vm._e(),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          !_vm.loggedIn
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "u-btn u-right u-login",
+                  attrs: { to: { name: "login" } }
+                },
+                [_vm._v("Login")]
+              )
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
-      _vm.loggedIn
-        ? _c("router-link", { attrs: { to: { name: "settings" } } }, [
-            _vm._v("Account Settings")
-          ])
-        : _vm._e(),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _vm.loggedIn
+            ? _c("router-link", { attrs: { to: { name: "settings" } } }, [
+                _vm._v("Account Settings")
+              ])
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
-      !_vm.loggedIn
-        ? _c(
-            "router-link",
-            {
-              staticClass: "u-btn u-right",
-              attrs: { to: { name: "register" } }
-            },
-            [_vm._v("Register")]
-          )
-        : _c(
-            "a",
-            {
-              staticClass: "u-btn u-right u-logout back",
-              on: { click: _vm.logout }
-            },
-            [_vm._v("Log Out")]
-          )
-    ],
-    1
-  )
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          !_vm.loggedIn
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "u-btn u-right",
+                  attrs: { to: { name: "register" } }
+                },
+                [_vm._v("Register")]
+              )
+            : _c(
+                "a",
+                {
+                  staticClass: "u-btn u-right u-logout back",
+                  on: { click: _vm.logout }
+                },
+                [_vm._v("Log Out")]
+              )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -24186,12 +24212,13 @@ var actions = {
             commit = _ref6.commit, getters = _ref6.getters;
             // we should activate whatever user we have in state
             user = getters.user;
-            axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + "/api/activate/" + user.email_token).then(function (response) {
+            _context2.next = 4;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + "/api/activate/" + user.email_token).then(function (response) {
               commit('UPDATE_USER', response.data.data);
             })["catch"](function (error) {// this means we didnt find the user for some reason
-            });
+            }));
 
-          case 3:
+          case 4:
           case "end":
             return _context2.stop();
         }
