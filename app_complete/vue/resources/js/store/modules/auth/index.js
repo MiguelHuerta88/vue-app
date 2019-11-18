@@ -28,15 +28,20 @@ const mutations = {
 };
 
 const actions = {
-	login({ commit }, fields) {
+	login({ commit, getters }, fields) {
 		commit('LOADING_PENDING');
 		/* how this currently stands it can break. For example if we remove the 
 		   frontend validation and sned empty fields. Laravel will return 
 		   422 response */
 		return new Promise((resolve, reject) => {
 			axios.post(API_URL + '/api/login', fields).then(response => {
-				if (!Object.keys(response.data.data.errors).length) {
+				//if (!Object.keys(response.data.data.errors).length) {
+				let obj = response.data.data;
+				if (!obj.hasOwnProperty('errors')) {
 					commit('UPDATE_IS_LOGGED_IN', true);
+					if (!Object.keys(getters.user).length) {
+						commit('UPDATE_USER', obj);
+					}
 				}
 				commit('LOADING_COMPLETE');
 				resolve(response.data.data);
@@ -51,6 +56,7 @@ const actions = {
 	logout({commit}) {
 		axios.get(API_URL + '/api/logout').then(response => {
 			commit('UPDATE_IS_LOGGED_IN', false);
+			commit('UPDATE_USER', {});
 		});
 	},
 	register({ commit }, fields) {

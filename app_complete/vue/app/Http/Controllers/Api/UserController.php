@@ -56,9 +56,7 @@ class UserController extends Controller
     		];
     	}
 
-    	return response()->json([
-    		'data' => $errors
-    	]);
+    	return new UserResource(Auth::user());
     }
 
     /**

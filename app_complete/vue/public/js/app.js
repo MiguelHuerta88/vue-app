@@ -1955,7 +1955,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
       this.$store.dispatch('login', this.fields).then(function (response) {
-        if (Object.keys(response.errors).length) {
+        var obj = response; //if (Object.keys(response.errors).length) {
+
+        if (obj.hasOwnProperty('errors')) {
           // not successful login
           _this.loginFailed = true;
           _this.disableBtn = false;
@@ -24001,15 +24003,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     name: 'thank-you',
     path: '/thank-you',
     component: _components_auth_ConfirmationComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
-    /*beforeEnter: (to, from, next) => {
-        // we need to check the vuex for a user
-        if (!Object.keys(store.getters.user).length) {
-            next("/");
-        } {
-            next();
-        }
-    }*/
-
   }, {
     name: 'activate-user',
     path: '/activate/:token',
@@ -24021,7 +24014,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   }]
 });
 router.beforeEach(function (to, from, next) {
-  //console.log(GUARDED_ROUTES.findIndex((item) => { console.log(item === to.name);item == to.name }));
   // we first check that is to.name matched a gaurded route then must be
   // logged in/ contain user in state. Otherwise redirect to login page
   var found = false;
@@ -24111,7 +24103,8 @@ var mutations = {
 };
 var actions = {
   login: function login(_ref, fields) {
-    var commit = _ref.commit;
+    var commit = _ref.commit,
+        getters = _ref.getters;
     commit('LOADING_PENDING');
     /* how this currently stands it can break. For example if we remove the 
        frontend validation and sned empty fields. Laravel will return 
@@ -24119,8 +24112,15 @@ var actions = {
 
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/login', fields).then(function (response) {
-        if (!Object.keys(response.data.data.errors).length) {
+        //if (!Object.keys(response.data.data.errors).length) {
+        var obj = response.data.data;
+
+        if (!obj.hasOwnProperty('errors')) {
           commit('UPDATE_IS_LOGGED_IN', true);
+
+          if (!Object.keys(getters.user).length) {
+            commit('UPDATE_USER', obj);
+          }
         }
 
         commit('LOADING_COMPLETE');
@@ -24150,6 +24150,7 @@ var actions = {
     var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(_config___WEBPACK_IMPORTED_MODULE_2__["API_URL"] + '/api/logout').then(function (response) {
       commit('UPDATE_IS_LOGGED_IN', false);
+      commit('UPDATE_USER', {});
     });
   },
   register: function register(_ref4, fields) {

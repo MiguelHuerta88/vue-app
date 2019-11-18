@@ -52,7 +52,9 @@
 
 				// otherwise continue and send the request to backend
 				this.$store.dispatch('login', this.fields).then(response => {
-					if (Object.keys(response.errors).length) {
+					let obj = response;
+					//if (Object.keys(response.errors).length) {
+					if (obj.hasOwnProperty('errors')) {
 						// not successful login
 						this.loginFailed =true;
 						this.disableBtn = false;
