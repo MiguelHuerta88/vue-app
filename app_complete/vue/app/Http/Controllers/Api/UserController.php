@@ -85,7 +85,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json([
                 'data' => []
-            ], 425);
+            ], 422);
         }
         // otherwise valid user was found return that
         return  new UserResource($user);
@@ -101,7 +101,7 @@ class UserController extends Controller
         if (!$token) {
             return response()->json([
                 'data' => []
-            ], 425);
+            ], 422);
         }
 
         // pull the user and activate

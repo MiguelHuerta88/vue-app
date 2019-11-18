@@ -84,7 +84,7 @@ const actions = {
 	async activateUser({ commit, getters }) {
 		// we should activate whatever user we have in state
 		let user = getters.user;
-		axios.get(API_URL + "/api/activate/" + user.email_token).then(response => {
+		await axios.get(API_URL + "/api/activate/" + user.email_token).then(response => {
 			commit('UPDATE_USER', response.data.data);
 		}).catch(error => {
 			// this means we didnt find the user for some reason
