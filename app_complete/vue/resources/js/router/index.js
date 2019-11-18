@@ -8,7 +8,10 @@ import LoginComponent from "../components/auth/LoginComponent";
 import RegisterComponent from "../components/auth/RegisterComponent";
 import ConfirmationComponent from "../components/auth/ConfirmationComponent";
 import ActivateUserComponent from "../components/auth/ActivateUserComponent";
+import UserAccountSettingsComponent from "../components/auth/UserAccountSettingsComponent";
 import store from "../store";
+// import guarded routes to check
+import { GUARDED_ROUTES } from "../config/guarded.js";
 
 Vue.use(VueRouter);
 
@@ -49,25 +52,32 @@ let router = new VueRouter({
             name: 'thank-you',
             path: '/thank-you',
             component: ConfirmationComponent,
-            beforeEnter: (to, from, next) => {
-                // we need to check the vuex for a user
-                if (!Object.keys(store.getters.user).length) {
-                    next("/");
-                } {
-                    next();
-                }
-            }
         },
         {
             name: 'activate-user',
             path: '/activate/:token',
             component: ActivateUserComponent
+        },
+        {
+            name: 'settings',
+            path: '/user/settings',
+            component: UserAccountSettingsComponent
         }
     ]
 });
 
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
+    // we first check that is to.name matched a gaurded route then must be
+    // logged in/ contain user in state. Otherwise redirect to login page
+    let found = false;
+    GUARDED_ROUTES.findIndex((item) => { (item === to.name) ? found = true : found = false });
 
-});*/
+    if (found && !Object.keys(store.getters.user).length) {
+        next('/login');
+    } else {
+        // route doesnt match a guarded route keep it going
+        next();
+    }
+});
 
 export default router

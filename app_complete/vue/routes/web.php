@@ -11,7 +11,7 @@
 |
 */
 Route::middleware(['https'])->group(function() {
-	Route::get('/', 'SinglePageAppController@index');
+	Route::get('/', 'SinglePageAppController@index')->name('home');
 	Route::get('/book/{book}', 'SinglePageAppController@index');
 	Route::get('/about-us', 'SinglePageAppController@index');
 	Route::get('contact-us', 'SinglePageAppController@index');
@@ -21,6 +21,9 @@ Route::middleware(['https'])->group(function() {
 	// should this route activate the user then redirect them?? Or should a true
 	// SPA app handle this in the component and ping the API to do it
 	Route::get('/activate/{token}', 'SinglePageAppController@index')->name('user.activate');
-
-	//Route::get('/books', 'SinglePageAppController@books');
+	// routes that require authenticated user
+	Route::middleware(['auth'])->group(function() {
+		Route::get('/user/settings', 'SinglePageAppController@index');
+	});
+	
 });
