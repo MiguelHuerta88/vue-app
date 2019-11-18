@@ -7,6 +7,7 @@ import AboutUsComponent from "../components/static/AboutUsComponent";
 import LoginComponent from "../components/auth/LoginComponent";
 import RegisterComponent from "../components/auth/RegisterComponent";
 import ConfirmationComponent from "../components/auth/ConfirmationComponent";
+import ActivateUserComponent from "../components/auth/ActivateUserComponent";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -56,6 +57,11 @@ let router = new VueRouter({
                     next();
                 }
             }
+        },
+        {
+            name: 'activate-user',
+            path: '/activate/:token',
+            component: ActivateUserComponent
         }
     ]
 });

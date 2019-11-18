@@ -10,14 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['https'])->group(function() {
+	Route::get('/', 'SinglePageAppController@index');
+	Route::get('/book/{book}', 'SinglePageAppController@index');
+	Route::get('/about-us', 'SinglePageAppController@index');
+	Route::get('contact-us', 'SinglePageAppController@index');
+	Route::get('/login', 'SinglePageAppController@index');
+	Route::get('/register', 'SinglePageAppController@index');
+	Route::get('/thank-you', 'SinglePageAppController@index');
+	// should this route activate the user then redirect them?? Or should a true
+	// SPA app handle this in the component and ping the API to do it
+	Route::get('/activate/{token}', 'SinglePageAppController@index')->name('user.activate');
 
-Route::get('/', 'SinglePageAppController@index');
-Route::get('/book/{book}', 'SinglePageAppController@index');
-Route::get('/about-us', 'SinglePageAppController@index');
-Route::get('contact-us', 'SinglePageAppController@index');
-Route::get('/login', 'SinglePageAppController@index');
-Route::get('/register', 'SinglePageAppController@index');
-Route::get('/thank-you', 'SinglePageAppController@index');
-Route::get('/activate/{token}', 'SinglePageAppController@index')->name('activate.user');
-
-//Route::get('/books', 'SinglePageAppController@books');
+	//Route::get('/books', 'SinglePageAppController@books');
+});

@@ -62,4 +62,17 @@ class User extends Authenticatable
     {
         return $query->whereNull('email_token');
     }
+
+    /**
+     * Find user by email_token
+     *
+     * @param      <type>  $query  The query
+     * @param      <type>  $token  The token
+     *
+     * @return  QueryBuilder
+     */
+    public function scopeFindByToken($query, $token)
+    {
+        return $query->where('email_token', $token);
+    }
 }

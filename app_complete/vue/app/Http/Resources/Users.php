@@ -23,7 +23,8 @@ class Users extends JsonResource
             'address' => $this->address,
             'city' => $this->city,
             'state' => $this->state,
-            'zipcode' => $this->zipcode
+            'zipcode' => $this->zipcode,
+            'email_token' => $this->email_token
         ];
     }
 }

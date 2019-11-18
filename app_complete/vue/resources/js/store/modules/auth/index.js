@@ -59,9 +59,29 @@ const actions = {
 				// sucess. update user but dont update is logged in since user has to verify
 				commit('UPDATE_USER', response.data.data);
 				return resolve(true);
-			}).catch(error =>{
+			}).catch(error => {
 				return reject(error.response.data);
 			});
+		});
+	},
+	find({ commit }, token) {
+		return new Promise((resolve, reject) => {
+			axios.get(API_URL + "/api/user/" + token).then(response => {
+				commit('UPDATE_USER', response.data.data);
+				return resolve(true);
+			}).catch(error => {
+				// error means user could not be found based on token
+				return reject(false);
+			});
+		});
+	},
+	async activateUser({ commit, getters }) {
+		// we should activate whatever user we have in state
+		let user = getters.user;
+		axios.get(API_URL + "/api/activate/" + user.email_token).then(response => {
+			commit('UPDATE_USER', response.data.data);
+		}).catch(error => {
+			// this means we didnt find the user for some reason
 		});
 	}
 };

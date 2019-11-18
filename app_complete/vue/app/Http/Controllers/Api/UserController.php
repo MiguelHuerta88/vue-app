@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use App\Http\Resources\Users as UserResource;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -34,7 +36,7 @@ class UserController extends Controller
     public function login(LoginRequest $request)
     {
         // before we try to log them in we need to make sure that this user has been verified
-        if (User::byUsername($request->get('username'))->nullEmailToken()->count()) {
+        if (!User::byUsername($request->get('username'))->nullEmailToken()->count()) {
             $errors['errors'] = [
                 'notmatch' => 'User has not verified email yet. Please check email'
             ];
@@ -71,5 +73,46 @@ class UserController extends Controller
     	return response()->json([
     		'data' => []
     	]);
+    }
+
+    /**
+     * Find by token
+     *
+     * @param  $token
+     * @return UserResource
+     */
+    public function token($token) {
+        $user = User::findByToken($token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'data' => []
+            ], 425);
+        }
+        // otherwise valid user was found return that
+        return  new UserResource($user);
+    }
+
+    /**
+     * activate user
+     *
+     * @param  $token
+     * @return Response
+     */
+    public function activateUser($token = null) {
+        if (!$token) {
+            return response()->json([
+                'data' => []
+            ], 425);
+        }
+
+        // pull the user and activate
+        $user = User::findByToken($token)->first();
+
+        $user->email_token = null;
+        $user->updated_at = Carbon::now();
+        $user->save();
+
+        return new UserResource(User::find($user->id));
     }
 }
